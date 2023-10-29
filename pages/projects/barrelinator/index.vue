@@ -1,6 +1,6 @@
 <style>
-.break {
-  flex-basis: 100%;
+.draw--container {
+  overflow: scroll;
 }
 </style>
 
@@ -8,42 +8,51 @@
   <div align="center">
     <h1 class="mt-10">Barrel'inator</h1>
     <p class="text--secondary mb-10">(not for real guns pls)</p>
-    <div class="d-flex align-start justify-start">
-      <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" class="pa-2">
-        <v-sheet
-            class="text-center"
-            style="overflow: hidden;"
-            height="20"
-            :width="dimensions[part.slug] * ratio"
-          >
-            {{ part.name }}
-        </v-sheet>
+    <div v-if="draw" class="draw--container">
+      <div class="d-flex align-start justify-start">
+        <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" class="pa-2">
+          <v-sheet
+              class="text-center"
+              style="overflow: hidden;"
+              height="20"
+              :width="dimensions[part.slug] * ratio"
+            >
+              {{ part.name }}
+          </v-sheet>
+        </div>
+      </div>
+      <div class="d-flex align-start justify-start">
+        <div class="pa-2">
+          <v-sheet
+              v-if="show.innerbarrel"
+              rounded="8"
+              class="text-center"
+              style="overflow: hidden;"
+              height="20"
+              :width="dimensions.innerbarrel * ratio"
+            >
+              {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
+          </v-sheet>
+        </div>
       </div>
     </div>
-    <div class="d-flex align-start justify-start">
-      <div class="pa-2">
-        <v-sheet
-            v-if="show.innerbarrel"
-            rounded="8"
-            class="text-center"
-            style="overflow: hidden;"
-            height="20"
-            :width="dimensions.innerbarrel * ratio"
-          >
-            {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
-        </v-sheet>
-      </div>
-    </div>
-    <div v-for="unit of units">
-      <div class="row my-10 ">
 
-        <v-card
-          v-for="part of parts"
-          elevation="1"
-          shaped
-          class="my-3 mx-2"
-          :class="part.classes"
-        >
+    <v-slider
+      v-model=ratio
+      class="ma-10"
+      label="Ratio"
+      :style="{ 'font-size': `${ratio}em` }"
+      :min="0.1"
+      :max="5"
+      :step="0.1"
+    />
+    
+    <div v-for="unit of units" class="row my-10">
+      <v-col
+        v-for="part of parts"
+        :cols="part.cols"
+      >
+      <v-card class="pa-1 ma-1" rounded>
           <v-card-text>
             <div> {{ unit.name }} ({{ unit.slug }}) </div>
             <div class="d-flex">
@@ -60,8 +69,7 @@
             />
           </v-card-text>
         </v-card>
-
-      </div>
+      </v-col>
     </div>
   </div>
 </template>
@@ -96,7 +104,7 @@ enum EPartsName {
 interface IParts {
   slug: EParts;
   name: EPartsName;
-  classes?: string[];
+  cols?: string;
 }
 
 interface IShow {
@@ -132,29 +140,6 @@ export default {
       { slug: EUnits.mm, name: EUnitsName.mm },
       { slug: EUnits.in, name: EUnitsName.in }
     ]
-  
-    const parts: IParts[] = [
-      {
-        slug: EParts.handguard,
-        name: EPartsName.handguard,
-        classes: ['col-5']
-      },
-      {
-        slug: EParts.suppressor,
-        name: EPartsName.suppressor,
-        classes: ['col']
-      },
-      {
-        slug: EParts.tracer,
-        name: EPartsName.tracer,
-        classes: ['col']
-      },
-      {
-        slug: EParts.innerbarrel,
-        name: EPartsName.innerbarrel,
-        classes: ['col-12']
-      }
-    ]
 
     const show: IShow = {
       [EParts.handguard]: true,
@@ -171,15 +156,47 @@ export default {
     };
 
     return {
+      draw: true,
       defaultValues,
       ratio,
       units,
-      parts,
       dimensions,
       show
     }
   },
   computed: {
+    isMobile (): boolean {
+      return this.$vuetify.breakpoint.mdAndDown
+    },
+    isVerySmall (): boolean {
+      return this.$vuetify.breakpoint.smAndDown
+    },
+    parts (): IParts[] {
+      return [
+        {
+          slug: EParts.handguard,
+          name: EPartsName.handguard,
+          cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '5' 
+        },
+        {
+          slug: EParts.suppressor,
+          name: EPartsName.suppressor,
+          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '4' 
+        },
+        {
+          slug: EParts.tracer,
+          name: EPartsName.tracer,
+          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '3' 
+        },
+        {
+          slug: EParts.innerbarrel,
+          name: EPartsName.innerbarrel,
+          cols: '12'
+        }
+      ]
+    }
+  
+    // parts: IParts[] = 
   },
   mounted () {
     console.log('Component mounted')
