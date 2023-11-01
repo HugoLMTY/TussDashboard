@@ -70,6 +70,11 @@ export default {
           to: '/projects/fygw',
         },
         {
+          icon: 'mdi-chart-bubble',
+          title: 'Paralafiche',
+          to: '/projects/paralafiche',
+        },
+        {
           icon: 'mdi-barrel',
           title: 'Barrelinator',
           to: '/projects/barrelinator',
@@ -94,7 +99,9 @@ export default {
   methods: {
     setTitle () {
       const { path } = this.$route
-      this.title = path === '/' ? 'Home' : this.items.find(item => item.to === path).title
+      this.title = path === '/' 
+        ? 'Home' 
+        : this.items.find(item => item.to === path)?.title || 'Nowhere'
     }
   }
 }
