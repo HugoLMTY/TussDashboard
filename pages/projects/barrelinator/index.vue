@@ -1,13 +1,11 @@
 <style>
 .draw--container {
-  overflow: scroll;
+  overflow: auto;
 }
 </style>
 
 <template>
-  <div align="center">
-    <h1 class="mt-10">Barrel'inator</h1>
-    <p class="text--secondary mb-10">(not for real guns pls)</p>
+  <Page :title="'Barrel\'inator'" :subtitle="'(not for real guns pls)'">
     <div v-if="draw" class="draw--container">
       <div class="d-flex align-start justify-start">
         <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" class="pa-2">
@@ -71,7 +69,7 @@
         </v-card>
       </v-col>
     </div>
-  </div>
+  </Page>
 </template>
 
 <script lang="ts">

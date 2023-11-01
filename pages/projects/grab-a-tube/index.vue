@@ -2,9 +2,10 @@
 </style>
 
 <template>
-  <div align="center">
-    <h1 class="mt-10">Grab-A-Tube</h1>
-    <p class="text--secondary mb-10"><i>you've never been here</i></p>
+  <Page :title="'Grab-A-Tube'">
+    <template v-slot:title>Grab-A-Tube</template>
+    <template v-slot:subtitle><i>you've never been here</i></template>
+    
     <v-text-field
       v-model="url"
       outlined
@@ -32,7 +33,7 @@
       color="red"
     /> -->
     </v-btn>
-  </div>
+  </Page>
 </template>
 
 <script>

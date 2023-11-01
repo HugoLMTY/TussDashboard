@@ -2,9 +2,7 @@
 </style>
 
 <template>
-  <div align="center">
-    <h1 class="mt-10">{{ insult || `Fais toi insulter gratuitement !` }}</h1>
-    <p class="text--secondary mb-10">{{ `${possibilities} possibilitées` }}</p>
+  <Page :title="insult || `Fais toi insulter gratuitement !`" :subtitle="`${possibilities} possibilitées`">
     <!-- btn just like me fr -->
     <v-btn
       depressed
@@ -13,13 +11,14 @@
       >
       Insulte moi
     </v-btn>
-  </div>
+  </Page>
 </template>
 
 <script>
 import prefixes from './utils/prefixes.json'
 import middles from './utils/middles.json'
 import suffixes from './utils/suffixes.json'
+
 export default {
   components: { },
   props: { },
