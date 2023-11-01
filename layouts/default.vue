@@ -65,6 +65,11 @@ export default {
           to: '/',
         },
         {
+          icon: 'mdi-crane',
+          title: 'Sandbox',
+          to: '/projects/sandbox',
+        },
+        {
           icon: 'mdi-pound-box',
           title: 'Find Your Good Words',
           to: '/projects/fygw',
@@ -92,7 +97,7 @@ export default {
     this.setTitle()
   },
   watch: {
-    $route ({ path }) {
+    $route () {
       this.setTitle()
     }
   },
