@@ -400,7 +400,7 @@ export default {
       .forEach(deco => {
         const el = this.$refs['deco_' + deco.id][0]
         if (!el) return
-        if (!deco.active) { return el.style.width = '0px' }
+        if (!deco.active) { return (el.style.width = '0px', el.style.border = 'none') }
 
         const offset = (axis) => {
           const base = container[axis === 'x' ? 'clientWidth' : 'clientHeight'] / 2
@@ -417,6 +417,8 @@ export default {
 
         if (deco.border) {
           el.style.border = `1px solid ${deco.borderColor}`
+        } else {
+          el.style.border = 'none'
         }
 
         el.style.left = offset('x')
