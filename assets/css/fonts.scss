@@ -1,136 +1,138 @@
+// Sora
+@font-face {
+  font-family: 'Sora';
+  src: url('../fonts/Sora/Sora-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+}
+
+// Nunito Sans
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/Nunito_Sans/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  font-style: italic;
+}
+
+
+// Red Hat Display
 @font-face {
   font-family: 'Red Hat Display';
   src: url('../fonts/Red_Hat_Display/RedHatDisplay-VariableFont_wght.ttf') format('truetype');
   font-style: normal;
 }
-
 @font-face {
   font-family: 'RedHat Display';
   src: url('../fonts/Red_Hat_Display/RedHatDisplay-Italic-VariableFont_wght.ttf') format('truetype');
   font-style: italic;
 }
 
-
-
+// Sinkin Sans
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-100Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-100ThinItalic.otf') format('opentype');
   font-weight: 100;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-200XLight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-200XLightItalic.otf') format('opentype');
   font-weight: 200;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-300Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-300LightItalic.otf') format('opentype');
   font-weight: 300;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-400Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-400Italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-500Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-500MediumItalic.otf') format('opentype');
   font-weight: 500;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-600SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-600SemiBoldItalic.otf') format('opentype');
   font-weight: 600;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-700Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-700BoldItalic.otf') format('opentype');
   font-weight: 700;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-800Black.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-800BlackItalic.otf') format('opentype');
   font-weight: 800;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-900XBlack.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Sinkin Sans';
   src: url('../fonts/sinkin-sans/SinkinSans-900XBlackItalic.otf') format('opentype');
