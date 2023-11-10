@@ -61,7 +61,7 @@
   <v-row class="landing" justify="center" align="center">
     <v-col cols="12" md="6">
       <h1 class="title">
-        Bienvenue chez moi, fais pas comme chez toi
+        Welcome chez oim, fais pas comme chez toi
       </h1>
 
       <span class="subtitle">
