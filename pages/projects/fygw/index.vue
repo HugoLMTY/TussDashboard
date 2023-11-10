@@ -16,8 +16,9 @@
 
 <script>
 import prefixes from './utils/prefixes.json'
-import middles from './utils/middles.json'
+import middless from './utils/middles.json'
 import suffixes from './utils/suffixes.json'
+// I added a second s to middless because it is more visually pleasing (lined up with the other two) (dont care if u dont like it sorry not sorry)
 
 export default {
   components: { },
@@ -31,7 +32,7 @@ export default {
   computed: {},
   mounted () {
     const pre = prefixes.filter(item => item.name !== '').length
-    const mid = middles.filter(item => item.name !== '').length
+    const mid = middless.filter(item => item.name !== '').length
     const suf = suffixes.filter(item => item.name !== '').length
 
     this.possibilities =
@@ -45,36 +46,34 @@ export default {
       this.insult = this.getInsult()
     },
     getInsult() {
-      //? Bypass le random pour avoir une insulte spécifique (pour les tests)
-      const $rig = { rigInsult: false, pre: false, mid: false, suf: false, range: false }
-      const rigged = [$rig, 4, 5, 4, 40]
-      //*   rigged	=	[ useBypass, 			prefix, 		middle, 		suffix, 		range 			]
+      // ? Bypass le random pour avoir une insulte spécifique (pour les tests)
+      const rigged = { pre: [true, 4], mid: [true, 5], suf: [true, 40], range: [true, 40] }
 
-      //? Get values
+      // ? Get values
       const getValue = (field) => { return field[getRand(0, field.length)] }
       const getRand = (min, max) => { return Math.floor((Math.random()) * max) + min }
 
-      //? Get states
+      // ? Get states
       const hasVowel = (string) => { return /[aeiouâéèê]/i.test(string[0]) }
       const isFemale = (word) => { return word.gender.toLowerCase() === 'female' }
 
-      //? Format strings
+      // ? Format strings
       const toUpper = (string) => { return string.charAt(0).toUpperCase() + string.slice(1) }
       const format = (string) => { return string.trim().toLowerCase() }
 
-      //? Filter arrays
+      // ? Filter arrays
       const filter = (array) => { return array.filter(item => item.name !== '').map(item => { return { ...item, name: format(item.name) } }) }
 
       const $prefixes = filter(prefixes)
-      const $middles = filter(middles)
+      const $middless = filter(middless)
       const $suffixes = filter(suffixes)
 
-      //? Ligne un peu longue pour déterminer si on utilise le rig ou non
-      let pre = rigged[0].rigInsult && rigged[0].pre ? $prefixes[rigged[1]] : getValue($prefixes)
-      let mid = rigged[0].rigInsult && rigged[0].mid ? $middles[rigged[2]] : getValue($middles)
-      let suf = rigged[0].rigInsult && rigged[0].suf ? $suffixes[rigged[3]] : getValue($suffixes)
+      // ? Ligne un peu longue pour déterminer si on utilise le rig ou non
+      const pre = (rigged.pre[0] && $prefixes[rigged.pre[1]]) ? $prefixes[rigged.pre[1]] : getValue($prefixes)
+      const mid = (rigged.mid[0] && $middless[rigged.mid[1]]) ? $middless[rigged.mid[1]] : getValue($middless)
+      const suf = (rigged.suf[0] && $suffixes[rigged.suf[1]]) ? $suffixes[rigged.suf[1]] : getValue($suffixes)
 
-      //? Si il y a un article défini ou partitif, on l'accorde avec le middle
+      // ? Si il y a un article défini ou partitif, on l'accorde avec le middle
       const preEnds = pre.name.split(" ").pop()
       switch (preEnds) {
         case "de":
@@ -97,17 +96,23 @@ export default {
           break;
 
         case "l'":
-          //? ↓ Tiendrais sur un ligne ( avec un || ) mais ca serait moche et moins lisible
+          // ? ↓ Tiendrais sur un ligne ( avec un || ) mais ca serait moche et moins lisible
           if (!hasVowel(mid.name)) pre.name = pre.name.replace(" l'", " le")
           if (!isFemale(mid)) pre.name = pre.name.replace(" l'", " le")
           if (isFemale(mid)) pre.name = pre.name.replace(" l'", " la")
           break;
       }
 
-      const range = rigged[0].range ? rigged[4] : getRand(0, 100)
+      const range = rigged.range[0] ? rigged.range[1] : getRand(0, 100)
 
-      //* Range vizualization
-      //? 1111111111333333333333333433333333333333333333333333333333332222222222222222222222222222222222222222
+      // Range vizualization
+      // ? 1111111111333333333333333433333333333333333333333333333333332222222222222222222222222222222222222222
+
+      // %
+      // 1: 1-10 (~10%)
+      // 2: 11-60 (~50%)
+      // 3: 61-100 (~40%)
+      // 4: 27 (~1%)
 
       const insultLength = range <= 10
         ? 1
@@ -117,16 +122,17 @@ export default {
             ? 3
             : 4
 
-      //? Ajout d'un espace si pas de lettre à apostrophe
+
+      // ? Ajout d'un espace si pas de lettre à apostrophe
       const $pre = `${pre.name}${pre.name.endsWith('\'') ? '' : ' '}`
 
-      //? Assignation à la variable représentant la partie centrale, dixit le corps lui-même, la valeur de l'insulte, contenue dans un objet regroupant diverses informations sur celle-ci, au préalable formatée et accordée dans le switch un peu plus haut
+      // ? Assignation à la variable représentvarant la partie centrale, dixit le corps lui-même, la valeur de l'insulte, contenue dans un objet regroupant diverses informations sur celle-ci, au préalable formatée et accordée dans le switch un peu plus haut
       const $mid = mid.name
 
-      //? Accord du masculin/féminin
-      const $suf = `${suf.name.replace('$', mid.gender == 'female' ? 'e' : '')}`
+      // ? Accord du masculin/féminin
+      const $suf = `${suf.name.replace('$', mid.gender === 'female' ? 'e' : '')}`
 
-      var insult = ''
+      let insult = ''
 
       switch (insultLength) {
         case 1:
@@ -134,7 +140,7 @@ export default {
           break
 
         case 2:
-          //? Varie entre prefixe / middle et middle / suffixe, pour + d'originalité
+          // ? Varie entre prefixe / middle et middle / suffixe, pour + d'originalité
           insult = getRand(0, 10) > 5
               ? `${$pre}${$mid}`
               : `${$mid} ${$suf}`

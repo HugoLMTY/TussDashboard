@@ -3,8 +3,7 @@
 
 <template>
   <Page :title="'Grab-A-Tube'">
-    <template v-slot:title>Grab-A-Tube</template>
-    <template v-slot:subtitle><i>you've never been here</i></template>
+    <template #subtitle><i>you've never been here</i></template>
     
     <v-text-field
       v-model="url"
@@ -52,7 +51,6 @@ export default {
     }
   },
   computed: {},
-  mounted () {},
   watch: {
     url (val) {
       if (val) {
@@ -60,6 +58,7 @@ export default {
       }
     }
   },
+  mounted () {},
   methods: {
     async download () {
       try {

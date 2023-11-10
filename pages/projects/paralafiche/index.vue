@@ -53,11 +53,11 @@ margin-top: 15vh;
     <v-dialog v-model="dialog" width="710">
       <v-card>
         <v-card-title class="ma-3">
-          {{ this.action?.toUpperCase() }}
+          {{ action?.toUpperCase() }}
         </v-card-title>
 
         <v-card-text>
-          <v-text-field :disabled="action === 'export'" v-model="datas" />
+          <v-text-field v-model="datas" :disabled="action === 'export'" />
         </v-card-text>
 
         <v-divider></v-divider>
@@ -140,8 +140,8 @@ margin-top: 15vh;
           </v-expansion-panel>
         </v-expansion-panels>
 
-        <v-expansion-panels id="decos_panels" class="my-5" v-model="selected">
-          <v-expansion-panel v-for="(deco, i) in decos">
+        <v-expansion-panels id="decos_panels" v-model="selected" class="my-5">
+          <v-expansion-panel v-for="(deco, i) in decos" :key="'menu_' + deco.id">
 
             <v-expansion-panel-header>
               {{ deco.name ? deco.name : 'Deco #' + deco.id }}
@@ -179,7 +179,7 @@ margin-top: 15vh;
                   <v-text-field v-model="decos[i].borderColor" mode="hexa" type="color" label="Couleur" :disabled="!decos[i].active"/>
                 </v-col>
 
-                <v-col cols="12" v-for="({ slug, name, range, step }) in fields">
+                <v-col v-for="({ slug, name, range, step }) in fields" :key="'slider_' + slug + '_' + i" cols="12" >
                   <!-- position.x + position.y -->
                   <v-slider
                     v-if="slug.split('.')[1]"
@@ -220,22 +220,22 @@ margin-top: 15vh;
 
         <v-row class="mt-5">
           <v-col>
-            <v-btn @click="exportSettings()" color="primary">Export</v-btn>
+            <v-btn color="primary" @click="exportSettings()" >Export</v-btn>
           </v-col>
           <v-col>
-            <v-btn @click="importSettings()" color="secondary">Import</v-btn>
+            <v-btn color="secondary" @click="importSettings()" >Import</v-btn>
           </v-col>
           <v-col>
-            <v-btn @click="reset()" color="danger">Reset</v-btn>
+            <v-btn color="danger" @click="reset()" >Reset</v-btn>
           </v-col>
         </v-row>
 
         <v-row class="mt-5">
           <v-col>
-            <v-btn @click="save()" color="purple">Save</v-btn>
+            <v-btn color="purple" @click="save()" >Save</v-btn>
           </v-col>
           <v-col>
-            <v-btn @click="load()" color="teal">Load</v-btn>
+            <v-btn color="teal" @click="load()" >Load</v-btn>
           </v-col>
         </v-row>
       </div>
@@ -249,7 +249,7 @@ margin-top: 15vh;
       Menu
     </v-btn>
 
-    <div id="render-container" v-if="decos.length">
+    <div v-if="decos.length" id="render-container">
       <div id="img--container">
         <div
           v-for="(deco, i) in decos"
@@ -321,45 +321,6 @@ export default {
         position: { x: 0, y: 0 }
       },
       baseDecos: [
-      // { 
-      //     id: 0,
-      //     name: 'top right',
-      //     active: true,
-      //     opposite: true,
-      //     border: false,
-      //     color: '#F33136',
-      //     borderColor: '#FFFFFF',
-      //     zindex: 3,
-      //     size: 60,
-      //     distance: 10,
-      //     position: { x: 150, y: -100 }
-      //   },
-      //   { 
-      //     id: 1,
-      //     name: 'middle left',
-      //     active: true,
-      //     opposite: true,
-      //     border: false,
-      //     color: '#3248a8',
-      //     borderColor: '#FFFFFF',
-      //     zindex: 3,
-      //     size: 40,
-      //     distance: 5,
-      //     position: { x: -150, y: 0 }
-      //   },
-      //   { 
-      //     id: 2,
-      //     name: 'bottom right',
-      //     active: true,
-      //     opposite: false,
-      //     border: false,
-      //     color: '#000000',
-      //     borderColor: '#FFFFFF',
-      //     zindex: 3,
-      //     size: 10,
-      //     distance: 20,
-      //     position: { x: 100, y: 100 }
-      //   },
       ]
     }
   },
@@ -436,7 +397,7 @@ export default {
       .forEach(deco => {
         const el = this.$refs['deco_' + deco.id][0]
         if (!el) return
-        if (!deco.active) { return (el.style.width = '0px', el.style.border = 'none') }
+        if (!deco.active) { el.style.width = '0px'; el.style.border = 'none'; return }
 
         const offset = (axis) => {
           const base = container[axis === 'x' ? 'clientWidth' : 'clientHeight'] / 2
@@ -491,7 +452,7 @@ export default {
     },
 
     removeDeco ({ id, name }) {
-      const remove = confirm(`Supprimer ${ name ? name : `Deco #${id}` } ?`)
+      const remove = confirm(`Supprimer ${ name || `Deco #${id}` } ?`)
       if (!remove) return
 
       this.decos = this.decos.filter(d => d.id !== id)
@@ -502,14 +463,12 @@ export default {
       if (!target) return alert('Pa trouvé')
 
       const name = prompt('Quel nom ?')
-      if (name) return target.name = name
+      if (name) { target.name = name; return }
 
       if (!target.name) return
       
       const reset = confirm('Supprimer le nom ?')
-      if (reset) return target.name = ''
-
-      return
+      if (reset) { target.name = ''; }
     },
     
     // -| ? |---------------------- GLOBAL ACTIONS

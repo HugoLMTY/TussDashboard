@@ -18,7 +18,7 @@ backdrop-filter: blur(11.1px);
   <Page :title="'Barrel\'inator'" :subtitle="'(not for real guns pls)'">
     <div v-if="draw" class="draw--container">
       <div class="d-flex align-start justify-start">
-        <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" class="pa-2">
+        <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" :key="'part_' + part.slug" class="pa-2">
           <v-sheet
               class="text-center"
               rounded
@@ -62,9 +62,10 @@ backdrop-filter: blur(11.1px);
       :step="0.1"
     />
     
-    <div v-for="unit of units" class="row my-10">
+    <div v-for="unit of units" :key="'unit_' + unit.slug" class="row my-10">
       <v-col
         v-for="part of parts"
+        :key="'form_' + part.slug"
         :cols="part.cols"
       >
       <div class="pa-1 ma-1" rounded>
@@ -91,50 +92,7 @@ backdrop-filter: blur(11.1px);
 
 <script lang="ts">
 
-enum EUnits {
-  mm = 'mm',
-  in = 'in'
-}
-enum EUnitsName {
-  mm = 'Millimètre',
-  in = 'Pouce'
-}
-interface IUnits {
-  slug: EUnits;
-  name: EUnitsName;
-}
-
-enum EParts {
-  handguard = 'handguard',
-  suppressor = 'suppressor',
-  tracer = 'tracer',
-  innerbarrel = 'innerbarrel'
-}
-enum EPartsName {
-  handguard = 'Garde main',
-  suppressor = 'Silencieux',
-  tracer = 'Traceur',
-  innerbarrel = 'Canon Interne'
-}
-interface IParts {
-  slug: EParts;
-  name: EPartsName;
-  cols?: string;
-}
-
-interface IShow {
-  [EParts.handguard]: boolean;
-  [EParts.suppressor]: boolean;
-  [EParts.tracer]: boolean;
-  [EParts.innerbarrel]: boolean;
-}
-
-interface IDimensions {
-  [EParts.handguard]: number;
-  [EParts.suppressor]: number;
-  [EParts.tracer]: number;
-  [EParts.innerbarrel]: number;
-}
+import { EUnits, EUnitsName, EParts, EPartsName, IUnits, IParts, IShow, IDimensions } from '@/types/barrelinator.types'
 
 export default {
   components: { },
@@ -163,7 +121,7 @@ export default {
       [EParts.innerbarrel]: true
     }
   
-    let dimensions: IDimensions = {
+    const dimensions: IDimensions = {
       [EParts.handguard]: defaultValues.dimensions.handguard,
       [EParts.suppressor]: defaultValues.dimensions.suppressor,
       [EParts.tracer]: defaultValues.dimensions.tracer,
@@ -176,7 +134,8 @@ export default {
       ratio,
       units,
       dimensions,
-      show
+      show,
+      parts: [] as IParts[]
     }
   },
   computed: {
@@ -185,8 +144,14 @@ export default {
     },
     isVerySmall (): boolean {
       return this.$vuetify.breakpoint.smAndDown
-    },
-    parts (): IParts[] {
+    },  
+  },
+  mounted () {
+    this.load()
+    this.parts = this.buildParts()
+  },
+  methods: {
+    buildParts (): IParts[] {
       return [
         {
           slug: EParts.handguard,
@@ -209,14 +174,8 @@ export default {
           cols: '12'
         }
       ]
-    }
-  
-    // parts: IParts[] = 
-  },
-  mounted () {
-    console.log('Component mounted')
-  },
-  methods: {
+    },
+
     setRatio (value: number) {
       this.ratio = value
     },
