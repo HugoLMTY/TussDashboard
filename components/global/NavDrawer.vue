@@ -79,19 +79,19 @@
       <v-divider class="mx-2" />
       
       <v-list-item
-        v-for="(item, i) in !flood ? items : [...items, ...items, ...items, ...items]"
+        v-for="({ icon, to, title }, i) in !flood ? items : [...items, ...items, ...items, ...items]"
         :key="i"
-        :to="item.to"
+        :to="to"
         :active-class="'active'"
         router
         exact
       >
         <v-list-item-action>
-          <img class="icon" :src="require(`@/assets/icons/${item.icon}${isActive(item.to) ? '_fill' : ''}.svg`)" alt="">
+          <img class="icon" :src="require(`@/assets/icons/${icon}${isActive(to) ? '_fill' : ''}.svg`)" alt="">
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>{{ title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -114,8 +114,8 @@
       </v-list-item>
       <v-list-item v-else
         class="settings"
-        @click="flood = !flood"
         :class="{ 'active': flood }"
+        @click="flood = !flood"
       >
         <v-list-item-action>
           <img class="icon" :src="require(`@/assets/icons/settings${flood ? '_fill' : ''}.svg`)">

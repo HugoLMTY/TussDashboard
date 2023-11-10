@@ -65,7 +65,7 @@ export default {
     Projects: () => import('~/components/home/Projects.vue'),
     Links: () => import('~/components/home/Links.vue'),
   },
-  created () {
+  mounted () {
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed () {

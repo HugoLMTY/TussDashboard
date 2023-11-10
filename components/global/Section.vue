@@ -1,11 +1,11 @@
 <style lang="scss" scoped>
 
 .section {
-  font-family: Sora;
-  
   min-height: 100vh;
 }
 .title {
+  font-family: Sora !important;
+
   color: var(--secondary-base, #1BD9FF);
   text-align: center;
 
@@ -19,6 +19,8 @@
 }
 
 .subtitle {
+  font-family: Sora !important;
+
   color: var(--grey-100, #FFF);
   text-align: center;
 
