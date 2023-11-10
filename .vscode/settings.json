@@ -1,0 +1,8 @@
+{
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "files.exclude": {
+    "**/.otf": true,
+    "**/.ttf": true
+  }
+}
