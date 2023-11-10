@@ -47,7 +47,7 @@ export default {
     },
     getInsult() {
       // ? Bypass le random pour avoir une insulte spécifique (pour les tests)
-      const rigged = { pre: [true, 4], mid: [true, 5], suf: [true, 40], range: [true, 40] }
+      const rigged = { pre: [false, 4], mid: [false, 5], suf: [false, 40], range: [false, 40] }
 
       // ? Get values
       const getValue = (field) => { return field[getRand(0, field.length)] }
