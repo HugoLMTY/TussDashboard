@@ -1,6 +1,16 @@
-<style>
+<style lang="scss">
 .draw--container {
   overflow: auto;
+}
+
+.part,
+.part-card {
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.19);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(11.1px);
+-webkit-backdrop-filter: blur(11.1px);
 }
 </style>
 
@@ -11,11 +21,15 @@
         <div v-for="part of parts.filter(p => show[p.slug] && p.slug !== 'innerbarrel')" class="pa-2">
           <v-sheet
               class="text-center"
-              style="overflow: hidden;"
-              height="20"
+              rounded
+              style="overflow: hidden; color: black"
+              :color="'primary lighten-3'"
+              height="25"
               :width="dimensions[part.slug] * ratio"
             >
-              {{ part.name }}
+              <sheet-footer>
+                {{ part.name }}
+              </sheet-footer>
           </v-sheet>
         </div>
       </div>
@@ -23,13 +37,16 @@
         <div class="pa-2">
           <v-sheet
               v-if="show.innerbarrel"
-              rounded="8"
               class="text-center"
-              style="overflow: hidden;"
-              height="20"
+              rounded
+              style="overflow: hidden; color: black"
+              :color="'primary lighten-3'"
+              height="25"
               :width="dimensions.innerbarrel * ratio"
             >
-              {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
+              <sheet-footer>
+                {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
+              </sheet-footer>
           </v-sheet>
         </div>
       </div>
@@ -50,8 +67,8 @@
         v-for="part of parts"
         :cols="part.cols"
       >
-      <v-card class="pa-1 ma-1" rounded>
-          <v-card-text>
+      <div class="pa-1 ma-1" rounded>
+          <v-card-text class="part-card">
             <div> {{ unit.name }} ({{ unit.slug }}) </div>
             <div class="d-flex">
               <v-switch v-model="show[part.slug]" :disabled="['innerbarrel', 'handguard'].includes(part.slug)" />
@@ -66,7 +83,7 @@
               @input="setDimension(part.slug, $event, unit.slug)"
             />
           </v-card-text>
-        </v-card>
+        </div>
       </v-col>
     </div>
   </Page>
@@ -126,10 +143,10 @@ export default {
     const defaultValues = {
       ratio: 2,
       dimensions: {
-        handguard: 254,
+        handguard: 406,
         suppressor: 145,
         tracer: 50,
-        innerbarrel: 363
+        innerbarrel: 509
       }
     }
 

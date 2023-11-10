@@ -71,6 +71,7 @@ margin-top: 15vh;
             Fermer
           </v-btn>
           <v-spacer></v-spacer>
+
           <v-btn
             color="primary"
             text
@@ -228,6 +229,15 @@ margin-top: 15vh;
             <v-btn @click="reset()" color="danger">Reset</v-btn>
           </v-col>
         </v-row>
+
+        <v-row class="mt-5">
+          <v-col>
+            <v-btn @click="save()" color="purple">Save</v-btn>
+          </v-col>
+          <v-col>
+            <v-btn @click="load()" color="teal">Load</v-btn>
+          </v-col>
+        </v-row>
       </div>
     </v-navigation-drawer>
 
@@ -248,7 +258,7 @@ margin-top: 15vh;
           class="deco"
           :class="{ 'selected': selected === i}"
         />
-        <img id="affiche" src="@/assets/pp_small.png" />
+        <img id="affiche" src="@/assets/illus/pp_small.png" />
       </div>
     </div>
 
@@ -271,6 +281,11 @@ export default {
       maxDecos: 8,
 
       fields: [
+        {
+          slug: 'opposite',
+          name: 'Opposite',
+          range: [1, 10]
+        },
         {
           slug: 'zindex',
           name: 'Couche',
@@ -306,52 +321,69 @@ export default {
         position: { x: 0, y: 0 }
       },
       baseDecos: [
-      { 
-          id: 0,
-          name: 'top right',
-          active: true,
-          opposite: true,
-          border: false,
-          color: '#F33136',
-          borderColor: '#FFFFFF',
-          zindex: 3,
-          size: 60,
-          distance: 10,
-          position: { x: 150, y: -100 }
-        },
-        { 
-          id: 1,
-          name: 'middle left',
-          active: true,
-          opposite: true,
-          border: false,
-          color: '#3248a8',
-          borderColor: '#FFFFFF',
-          zindex: 3,
-          size: 40,
-          distance: 5,
-          position: { x: -150, y: 0 }
-        },
-        { 
-          id: 2,
-          name: 'bottom right',
-          active: true,
-          opposite: false,
-          border: false,
-          color: '#000000',
-          borderColor: '#FFFFFF',
-          zindex: 3,
-          size: 10,
-          distance: 20,
-          position: { x: 100, y: 100 }
-        },
+      // { 
+      //     id: 0,
+      //     name: 'top right',
+      //     active: true,
+      //     opposite: true,
+      //     border: false,
+      //     color: '#F33136',
+      //     borderColor: '#FFFFFF',
+      //     zindex: 3,
+      //     size: 60,
+      //     distance: 10,
+      //     position: { x: 150, y: -100 }
+      //   },
+      //   { 
+      //     id: 1,
+      //     name: 'middle left',
+      //     active: true,
+      //     opposite: true,
+      //     border: false,
+      //     color: '#3248a8',
+      //     borderColor: '#FFFFFF',
+      //     zindex: 3,
+      //     size: 40,
+      //     distance: 5,
+      //     position: { x: -150, y: 0 }
+      //   },
+      //   { 
+      //     id: 2,
+      //     name: 'bottom right',
+      //     active: true,
+      //     opposite: false,
+      //     border: false,
+      //     color: '#000000',
+      //     borderColor: '#FFFFFF',
+      //     zindex: 3,
+      //     size: 10,
+      //     distance: 20,
+      //     position: { x: 100, y: 100 }
+      //   },
       ]
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    menu (state) {
+      if (!state) {
+        this.selected = null
+      }
+    }
+  },
   mounted () {
-    this.decos = JSON.parse(JSON.stringify(this.baseDecos))
+    // this.decos = JSON.parse(JSON.stringify(this.baseDecos))
+    const saved = localStorage.getItem('paralafiche')
+    if (saved) {
+      const { decos, boxShadow } = JSON.parse(saved)
+      this.decos = decos
+      this.boxShadow = boxShadow
+    } else {
+      const randomCount = Math.floor(Math.random() * (this.maxDecos - 2) + 2)
+      for (let i = 0; i < randomCount; i++) {
+        this.addDeco()
+      }
+    }
 
     document.addEventListener('mousemove', (e) => this.onMove(e))
     this.onMove()
@@ -369,7 +401,11 @@ export default {
         y: (e.clientY) - (container.offsetTop + container.clientHeight / 2)
       }
       const affiche = document.getElementById('affiche')
-      const distance = Math.sqrt(mouse.x * mouse.x + mouse.y * mouse.y) / 20000;
+      // const distance = Math.sqrt(mouse.x * mouse.x + mouse.y * mouse.y) / 20000;
+      const distance = {
+        x: Math.abs(mouse.x) / 20000,
+        y: Math.abs(mouse.y) / 20000
+      }
 
       this.drawBoxShadow({ mouse, affiche })
       this.drawDecos({ mouse, container, distance })
@@ -409,7 +445,8 @@ export default {
       
           const cursor = mouse[axis]
       
-          const multiplicator = distance * (deco.distance / 10) 
+          // const multiplicator = distance * (deco.distance / 10) 
+          const multiplicator = distance[axis] * (deco.distance / 10)
           const offset = deco.opposite ? -multiplicator : multiplicator
 
           return (position + cursor * offset) + 'px'
@@ -441,7 +478,7 @@ export default {
         id: this.decos.length + 1,
         name: '',
         active: true,
-        opposite: Math.random([1, 10]) >= 5,
+        opposite: Math.random() >= 0.5,
         color: '#' + Math.floor(Math.random()*16777215).toString(16),
         zindex: random('zindex'),
         size: random('size'),
@@ -505,6 +542,21 @@ export default {
 
       this.dialog = false
       this.action = null
+    },
+
+    save () {
+      localStorage.setItem('paralafiche', JSON.stringify({
+        decos: this.decos,
+        boxShadow: this.boxShadow
+      }))
+    },
+    load () {
+      const saved = localStorage.getItem('paralafiche')
+      if (!saved) return
+
+      const { decos, boxShadow } = JSON.parse(saved)
+      this.decos = decos
+      this.boxShadow = boxShadow
     },
 
     reset () {

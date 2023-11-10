@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss">
 .affiche {
   font-family: Sinkin Sans;
 
@@ -179,7 +179,7 @@ export default {
   props: {
     img: {
       type: String,
-      default: '@/assets/pp_small.png'
+      default: '@/assets/illus/pp_small.png'
     },
     title: {
       type: String,

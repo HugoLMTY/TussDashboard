@@ -1,48 +1,49 @@
-<template>
-  <v-app dark>
-    <v-navigation-drawer
-      ref="drawer"
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      app
-      permanent
-      expand-on-hover
-    >
-      <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              <img src="@/assets/pp_small.png" alt="Avatar" style="border-radius: 50%; width: 24px; aspect-ratio: 1/1;">
-            </v-list-item-title>
-            <v-list-item-title class="text-h6">
-              Hugo LE METAYER
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              hugo.lm2707@gmailcom
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+<style lang="scss">
 
-      <v-divider></v-divider>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar app>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
-    </v-app-bar>
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-track {
+  background: var(--grey-500, #221D31);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--grey-300, #363143);
+  border-radius: 20px;
+}
+
+#app {
+  font-family: Sora;
+
+  height: 3429px;
+
+  scroll-behavior: smooth;
+
+  position: relative;
+  background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), var(--grey-700, #0F0A1F);
+}
+
+#app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 180vh;
+  background: url(~/assets/illus/background.svg), lightgray 0px -30.706px / 100% 112.941% no-repeat;
+  mix-blend-mode: color-dodge;
+  background-size: cover;
+  background-position: center;
+  mask-image: linear-gradient(black, transparent, transparent);
+}
+
+
+</style>
+
+<template>
+  <v-app id="app" dark>
+    <NavDrawer />
     <v-main>
       <v-container>
         <Nuxt />
@@ -52,62 +53,18 @@
 </template>
 
 <script>
+import NavDrawer from '~/components/global/NavDrawer.vue'
+
 export default {
   name: 'DefaultLayout',
   data() {
     return {
-      drawer: true,
-      miniVariant: true,
-      items: [
-        {
-          icon: 'mdi-home',
-          title: 'Home',
-          to: '/',
-        },
-        {
-          icon: 'mdi-crane',
-          title: 'Sandbox',
-          to: '/projects/sandbox',
-        },
-        {
-          icon: 'mdi-pound-box',
-          title: 'Find Your Good Words',
-          to: '/projects/fygw',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Paralafiche',
-          to: '/projects/paralafiche',
-        },
-        {
-          icon: 'mdi-barrel',
-          title: 'Barrelinator',
-          to: '/projects/barrelinator',
-        },
-        {
-          icon: 'mdi-progress-download',
-          title: 'Grab-A-Tube',
-          to: '/projects/grab-a-tube',
-        },
-      ],
-      title: 'Tuss',
-    }
+    };
   },
-  mounted() {
-    this.setTitle()
-  },
-  watch: {
-    $route () {
-      this.setTitle()
-    }
-  },
+  mounted() {},
+  watch: {},
   methods: {
-    setTitle () {
-      const { path } = this.$route
-      this.title = path === '/' 
-        ? 'Home' 
-        : this.items.find(item => item.to === path)?.title || 'Nowhere'
-    }
-  }
+  },
+  components: { NavDrawer }
 }
 </script>
