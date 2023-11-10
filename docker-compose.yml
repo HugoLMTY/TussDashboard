@@ -5,6 +5,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:3000"
+      - "8080:3000"
     volumes:
       - .:/app
+      - ./assets:/app/assets
+      - ./components:/app/components
+      - ./layouts:/app/layouts
+      - ./pages:/app/pages
+      - ./plugins:/app/plugins
+      - ./static:/app/static
+      - ./store:/app/store
+      - ./types:/app/types
