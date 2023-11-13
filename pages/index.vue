@@ -15,7 +15,7 @@
   align-items: start;
 
   z-index: 2;
-  background-color: black;
+  background: var(--grey-600, #181428);
   opacity: 0.1;
   transition-duration: 0.2s;
 

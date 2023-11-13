@@ -2,7 +2,7 @@
 .landing {
   min-height: 100vh;
 
-  width: 90%;
+  width: 100%;
   margin: auto;
 
   user-select: none;
@@ -15,7 +15,7 @@
     line-height: 120% !important;
     margin-bottom: 16px;
     
-    max-width: 80%;
+    max-width: 100%;
   }
 
   .subtitle {
@@ -24,7 +24,7 @@
     font-weight: 400 !important;
     letter-spacing: 0.32px !important;
     line-height: 160% !important;
-    color: var(--grey-100, #FFF) !important;
+    color: $--grey-100 !important;
   }
 
   .img {

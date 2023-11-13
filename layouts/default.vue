@@ -5,11 +5,11 @@
   border-radius: 20px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--grey-500, #221D31);
+  background: $--grey-500;
   border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--grey-300, #363143);
+  background: $--grey-300;
   border-radius: 20px;
 }
 
@@ -21,7 +21,7 @@
   scroll-behavior: smooth;
 
   position: relative;
-  background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), var(--grey-700, #0F0A1F);
+  background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), $--grey-700;
 }
 
 #app::before {
@@ -31,8 +31,7 @@
   left: 0;
   width: 100vw;
   height: 180vh;
-  background: url(~/assets/illus/background.svg), lightgray 0px -30.706px / 100% 112.941% no-repeat;
-  mix-blend-mode: color-dodge;
+  background: url(~/assets/illus/background.svg), $--primary-500 0px -30.706px / 100% 112.941% no-repeat;
   background-size: cover;
   background-position: center;
   mask-image: linear-gradient(black, transparent, transparent);
@@ -57,14 +56,14 @@ import NavDrawer from '~/components/global/NavDrawer.vue'
 
 export default {
   name: 'DefaultLayout',
+  components: { NavDrawer },
   data() {
     return {
     };
   },
-  mounted() {},
   watch: {},
+  mounted() {},
   methods: {
   },
-  components: { NavDrawer }
 }
 </script>

@@ -14,7 +14,7 @@
 }
 
 #nav {
-  background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), var(--grey-700, #0F0A1F);
+  background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), $--grey-700;
   position: fixed;
   overflow: hidden;
   backdrop-filter: blur(10px) !important;

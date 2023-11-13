@@ -1,35 +1,54 @@
 <style lang="scss" scoped>
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120vw;
+  height: 100%;
+  pointer-events: none;
+  
+  background: url(~/assets/illus/wavy.svg), 0px -30.706px / 100% 112.941% no-repeat;
+  background-size: cover;
+  background-position: center;
+  mask-image: linear-gradient(transparent, black, transparent);
+  min-height: 100vh;
+
+  z-index: 0;
+}
 
 .section {
-  min-height: 100vh;
-}
-.title {
-  font-family: Sora !important;
 
-  color: var(--secondary-base, #1BD9FF);
-  text-align: center;
+  position: relative;
 
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 140%;
-  letter-spacing: 1.26px;
-  text-transform: uppercase;
-
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  font-family: Sora !important;
-
-  color: var(--grey-100, #FFF);
-  text-align: center;
-
-  font-size: 51px;
-  font-weight: 700;
-  line-height: 120%;
-  letter-spacing: -0.51px;
-
-  margin-bottom: 48px;
+  .title {
+    font-family: Sora !important;
+  
+    color: var(--secondary-base, #1BD9FF);
+    text-align: center;
+  
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 1.26px;
+    text-transform: uppercase;
+  
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-family: Sora !important;
+  
+    color: $--grey-100;
+    text-align: center;
+  
+    font-size: 51px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: -0.51px;
+  
+    margin-bottom: 48px;
+  }
 }
 </style>
 

@@ -14,6 +14,7 @@ module.exports = {
     'no-console': 'off',
     'vue/first-attribute-linebreak': 'off',
     'vue/multi-word-component-names': 'off',
+    'vue/no-reserved-component-names': 'off',
     'vue/component-tags-order': [
       'warn', {
         order: ['style', 'template', 'script'],
