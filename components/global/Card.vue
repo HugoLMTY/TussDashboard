@@ -62,6 +62,22 @@
     font-weight: 700;
     line-height: 140%;
     letter-spacing: -0.28px;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    .card--info {
+      color: $--grey-200;
+
+      font-family: Nunito Sans;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 160%;
+      letter-spacing: 0.32px;
+    }
+    
   }
 
   .card--content {  
@@ -81,6 +97,9 @@
     <div v-if="type !== 'mesh'" class="card--container" :class="[type]">
       <h4 class="card--title">
         <slot name="title">{{ title }}</slot>
+        <div class="card--info">
+          <slot name="info">{{ info }}</slot>
+        </div>
       </h4>
       <div class="card--content">
         <slot>{{ content }}</slot>
@@ -91,6 +110,9 @@
       <div class="card--content-container">
         <h4 class="card--title">
           <slot name="title">{{ title }}</slot>
+          <div class="card--info">
+            <slot name="info">{{ info }}</slot>
+          </div>
         </h4>
         <div class="card--content">
           <slot>{{ content }}</slot>
@@ -108,6 +130,10 @@ export default {
     title: {
       type: String,
       default: 'Example container'
+    },
+    info: {
+      type: String,
+      default: null
     },
     content: {
       type: String,
