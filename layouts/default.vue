@@ -24,18 +24,7 @@
   background: linear-gradient(180deg, rgba(77, 27, 255, 0.12) 0%, rgba(77, 27, 255, 0.00) 50%, rgba(77, 27, 255, 0.00) 100%), $--grey-700;
 }
 
-#app::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 180vh;
-  background: url(~/assets/illus/background.svg), $--primary-500 0px -30.706px / 100% 112.941% no-repeat;
-  background-size: cover;
-  background-position: center;
-  mask-image: linear-gradient(black, transparent, transparent);
-}
+
 
 
 </style>
