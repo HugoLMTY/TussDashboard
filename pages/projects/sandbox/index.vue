@@ -7,6 +7,7 @@
     <div class="d-flex overflow-auto" align="center">
       <Affiche
         v-for="{ title, desc, tags, img } in projects"
+        :key="'affiche-' + title"
         class="ma-5"
         :title="title"
         :desc="desc"
@@ -35,7 +36,7 @@ export default {
           tags: [
             'Affiche', 'IntelligenceArtificielle', 'Animation', 'Scolaire'
           ],
-          img: 'clean_1.svg'
+          img: 'clean_1.png'
         },
         {
           title: "Le chat de ta mère Michelle",

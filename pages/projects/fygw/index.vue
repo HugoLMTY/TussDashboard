@@ -4,13 +4,12 @@
 <template>
   <Page :title="insult || `Fais toi insulter gratuitement !`" :subtitle="`${possibilities} possibilitées`">
     <!-- btn just like me fr -->
-    <v-btn
-      depressed
-      outlined
+    <Button
+      glass
       @click="setInsult"
-      >
+    >
       Insulte moi
-    </v-btn>
+    </Button>
   </Page>
 </template>
 

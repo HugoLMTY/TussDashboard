@@ -152,10 +152,10 @@
 
 <template>
   <div class="affiche">
-    <img src="@/assets/affiches/clean_1.svg" alt="background" class="background">
-    <img src="@/assets/affiches/author.png" alt="author" class="author">
+    <img :src="require('@/assets/affiches/' + img)" alt="background" class="background">
+    <img :src="require('@/assets/affiches/author.png')" alt="author" class="author">
     <div class="search">
-      <img src="@/assets/affiches/loupe.svg" alt="search" class="loupe">
+      <img :src="require('@/assets/affiches/loupe.svg')" alt="search" class="loupe">
     </div>
 
     <p class="header d-flex flex-column" align="start">
@@ -167,7 +167,7 @@
     <v-spacer />
     
     <div class="footer" align="start">
-      <v-chip class="tag" v-for="tag in tags">#{{  tag  }}</v-chip>
+      <v-chip v-for="(tag, i) in tags" :key="'tag_' + i" class="tag">#{{  tag  }}</v-chip>
     </div>
 
   </div>

@@ -48,8 +48,7 @@ margin-top: 15vh;
 </style>
 
 <template>
-  <div align="center">
-
+    <Page title="Paralafiche" subtitle="sa bouj">
     <v-dialog v-model="dialog" width="710">
       <v-card>
         <v-card-title class="ma-3">
@@ -241,13 +240,9 @@ margin-top: 15vh;
       </div>
     </v-navigation-drawer>
 
-
-    <h1 class="mt-10">Paralafiche</h1>
-    <p class="text--secondary mb-10"><i>sa bouj</i></p>
-
-    <v-btn @click="menu = !menu">
+    <Button glass @click="menu = !menu">
       Menu
-    </v-btn>
+    </Button>
 
     <div v-if="decos.length" id="render-container">
       <div id="img--container">
@@ -262,7 +257,7 @@ margin-top: 15vh;
       </div>
     </div>
 
-  </div>
+  </Page>
 </template>
 
 <script>
