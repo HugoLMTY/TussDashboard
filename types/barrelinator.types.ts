@@ -27,6 +27,7 @@ export interface IParts {
   slug: EParts;
   name: EPartsName;
   cols?: string;
+  range: [number, number];
 }
 
 export interface IShow {

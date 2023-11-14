@@ -25,11 +25,9 @@ backdrop-filter: blur(11.1px);
               style="overflow: hidden; color: black"
               :color="'primary lighten-3'"
               height="25"
-              :width="dimensions[part.slug] * ratio"
+              :width="(dimensions[part.slug] * ratio) + 'px'"
             >
-              <sheet-footer>
-                {{ part.name }}
-              </sheet-footer>
+              {{ part.name }}
           </v-sheet>
         </div>
       </div>
@@ -42,11 +40,9 @@ backdrop-filter: blur(11.1px);
               style="overflow: hidden; color: black"
               :color="'primary lighten-3'"
               height="25"
-              :width="dimensions.innerbarrel * ratio"
+              :width="(dimensions.innerbarrel * ratio) + 'px'"
             >
-              <sheet-footer>
-                {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
-              </sheet-footer>
+              {{ parts.find(p => p.slug === 'innerbarrel')?.name }}
           </v-sheet>
         </div>
       </div>
@@ -56,37 +52,60 @@ backdrop-filter: blur(11.1px);
       v-model=ratio
       class="ma-10"
       label="Ratio"
-      :style="{ 'font-size': `${ratio}em` }"
       :min="0.1"
       :max="5"
       :step="0.1"
     />
     
-    <div v-for="unit of units" :key="'unit_' + unit.slug" class="row my-10">
-      <v-col
+    <div class="row mb-5">
+      <Card
         v-for="part of parts"
         :key="'form_' + part.slug"
         :cols="part.cols"
+        :title="part.name"
+        :class="`col-${part.cols}`"
+        glass
       >
-      <div class="pa-1 ma-1" rounded>
-          <v-card-text class="part-card">
-            <div> {{ unit.name }} ({{ unit.slug }}) </div>
-            <div class="d-flex">
-              <v-switch v-model="show[part.slug]" :disabled="['innerbarrel', 'handguard'].includes(part.slug)" />
-              <p class="col text-h5 text--primary" :class="{ 'text--disabled': !show[part.slug] }">{{ part.name }}</p>
-            </div>
+        <template #info>
+          <v-switch v-model="show[part.slug]" :disabled="['innerbarrel', 'handguard'].includes(part.slug)" />
+        </template>
+
+        <div class="row">
+          <div
+            v-for="unit in units"
+            :key="'form_' + part.slug + '_unit_' + unit.slug" 
+            class="col"
+          >
             <v-text-field
               type="number"
               min="1"
-              :label="part.name"
+              :label="part.name + ` (${unit.name})`"
               :disabled="!show[part.slug]"
               :value="getDimension(part.slug, unit.slug)"
               @input="setDimension(part.slug, $event, unit.slug)"
             />
-          </v-card-text>
+          </div>
+
+          <v-slider
+            v-model="dimensions[part.slug]"
+            class="col-12"
+            label="Ratio"
+            :min="part.range[0]"
+            :max="part.range[1]"
+            :step="1"
+          />
         </div>
-      </v-col>
+      </Card>
     </div>
+
+    <Card mesh title="Total">
+      <v-data-table
+        :headers="headers"
+        :items="tableValues"
+        class="elevation-1"
+      />
+    </Card>
+
   </Page>
 </template>
 
@@ -135,6 +154,7 @@ export default {
       units,
       dimensions,
       show,
+      headers: [] as { text: string, value: string }[],
       parts: [] as IParts[]
     }
   },
@@ -145,10 +165,46 @@ export default {
     isVerySmall (): boolean {
       return this.$vuetify.breakpoint.smAndDown
     },  
+    tableValues () {
+      const values: any = []
+      
+      this.units.forEach(unit => {
+        const current: any = {} 
+
+        this.headers.forEach(header => {
+          const getVal = (slug: string) => {
+            switch (slug) {
+              case 'unit':
+                return unit.name
+  
+              case 'total':
+                return (
+                  this.getDimension(EParts.handguard, unit.slug) +
+                  this.getDimension(EParts.suppressor, unit.slug) +
+                  this.getDimension(EParts.tracer, unit.slug)
+                )  
+
+              case 'diff':
+                return this.getDimension(EParts.innerbarrel, unit.slug) - (this.getDimension(EParts.handguard, unit.slug) + this.getDimension(EParts.suppressor, unit.slug))
+  
+              default:
+                return this.getDimension(slug as EParts, unit.slug)
+            }
+          }
+          current[header.value] = `${getVal(header.value)}${header.value !== 'unit' ? unit.slug : ''}`
+        })
+
+        values.push(current)
+      })
+
+      return values
+    }
   },
   mounted () {
     this.load()
+    this.dimensions = { ...this.defaultValues.dimensions }
     this.parts = this.buildParts()
+    this.headers = this.buildHeaders()
   },
   methods: {
     buildParts (): IParts[] {
@@ -156,23 +212,47 @@ export default {
         {
           slug: EParts.handguard,
           name: EPartsName.handguard,
-          cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '5' 
+          cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '5',
+          range: [ 100, 800 ]
         },
         {
           slug: EParts.suppressor,
           name: EPartsName.suppressor,
-          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '4' 
+          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '4',
+          range: [ 50, 300 ]
         },
         {
           slug: EParts.tracer,
           name: EPartsName.tracer,
-          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '3' 
+          cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '3',
+          range: [ 10, 300 ]
         },
         {
           slug: EParts.innerbarrel,
           name: EPartsName.innerbarrel,
-          cols: '12'
+          cols: '12',
+          range: [ 100, 800 ]
         }
+      ]
+    },
+    buildHeaders (): { text: string, value: string }[] {
+      return [
+        {
+          text: 'Unité',
+          value: 'unit'
+        },
+        ...this.parts.map(p => ({
+          text: p.name,
+          value: p.slug
+        })),
+        {
+          text: 'Total externe',
+          value: 'total'
+        },
+        {
+          text: 'Différence',
+          value: 'diff'
+        },
       ]
     },
 
