@@ -4,3 +4,8 @@
   background: linear-gradient(133deg, rgba(77, 27, 255, 0.20) 0%, rgba(255, 255, 255, 0.00) 100%), rgba(255, 255, 255, 0.04);
   backdrop-filter: blur($--glass-blur);
 }
+
+.disabled {
+  opacity: 0.42;
+  pointer-events: none;
+}
