@@ -13,13 +13,6 @@
     backdrop-filter: blur(0);    
   }
 
-  &.glass {
-    border-top: 1px solid $--grey-200;
-    border-left: 1px solid $--grey-200;
-    background: linear-gradient(133deg, rgba(77, 27, 255, 0.20) 0%, rgba(255, 255, 255, 0.00) 100%), rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur($--glass-blur);
-  }
-
   &.mesh {
     position: relative;
     border-radius: calc(20px + $--mesh-offset);

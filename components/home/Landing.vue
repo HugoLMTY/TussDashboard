@@ -1,4 +1,20 @@
 <style lang="scss">
+
+.landing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 180vh;
+  background: url(~/assets/illus/background.svg), $--primary-500 0px -30.706px / 100% 112.941% no-repeat;
+  background-size: cover;
+  background-position: center;
+  mask-image: linear-gradient(black, transparent, transparent);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .landing {
   min-height: 100vh;
 
@@ -6,6 +22,11 @@
   margin: auto;
 
   user-select: none;
+
+  .header,
+  .illustration {
+    z-index: 2;
+  }
 
   .title {
     font-family: Sora !important;
@@ -26,40 +47,12 @@
     line-height: 160% !important;
     color: $--grey-100 !important;
   }
-
-  .img {
-    :hover {
-      animation: shake 0.69s;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes shake {
-      0% { transform: translate(1px, 1px) rotate(0deg); }
-      10% { transform: translate(-1px, -2px) rotate(-1deg); }
-      20% { transform: translate(-3px, 0px) rotate(1deg); }
-      30% { transform: translate(3px, 2px) rotate(0deg); }
-      40% { transform: translate(1px, -1px) rotate(1deg); }
-      50% { transform: translate(-1px, 2px) rotate(-1deg); }
-      60% { transform: translate(-3px, 1px) rotate(0deg); }
-      70% { transform: translate(3px, 1px) rotate(-1deg); }
-      80% { transform: translate(-1px, -1px) rotate(1deg); }
-      90% { transform: translate(1px, 2px) rotate(0deg); }
-      100% { transform: translate(1px, -2px) rotate(-1deg); }
-    }
-
-    @keyframes squeeze {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-  }
 }
 </style>
 
 <template>
   <v-row class="landing" justify="center" align="center">
-    <v-col cols="12" md="6">
+    <v-col class="header" cols="12" md="6">
       <h1 class="title">
         Welcome chez oim, fais pas comme chez toi
       </h1>
@@ -71,15 +64,17 @@
       </span>
     </v-col>
 
-    <v-col class="img" cols="12" md="6" align="start">
-      <img src="@/assets/illus/main_cactus.png" alt="">
+    <v-col cols="12" md="6" align="start" justify="center">
+      <Cactus />
     </v-col>
   </v-row>
 </template>
 
 <script>
+import Cactus from '@/components/home/landing/Cactus.vue'
+
 export default {
-  components: { },
+  components: { Cactus },
   props: { },
   data () {
     return {

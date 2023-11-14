@@ -20,6 +20,7 @@
 .section {
 
   position: relative;
+  width: 100% !important;
 
   .title {
     font-family: Sora !important;

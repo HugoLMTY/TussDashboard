@@ -71,7 +71,7 @@
       <v-list-item class="header">
         <v-list-item-content>
           <v-list-item-title>
-            <img src="@/assets/illus/pp_small.png" alt="Avatar" style="border-radius: 50%; width: 24px; aspect-ratio: 1/1;">
+            <img src="@/assets/illus/logo_ai.svg" alt="Avatar" style="border-radius: 50%; width: 27px; aspect-ratio: 1/1;">
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>

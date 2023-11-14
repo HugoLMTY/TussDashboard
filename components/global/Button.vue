@@ -1,49 +1,66 @@
 <style lang="scss">
-
 .button--content {
   font-family: Nunito Sans !important;
   font-weight: bold;
 
   display: inline-flex;
-  height: 52px !important;
-  width: 163px !important;
+  
+  height: 50px !important;
+  min-width: 150px !important;
+  max-width: 300px !important;
+
   padding: 16px 32px;
   justify-content: center;
   align-items: center;
   gap: 8px;
 
-  border-radius: 12px;
+  overflow: hidden;
+  border-radius: 12px !important;
   user-select: none;
   transition-duration: 0.2s !important;
 
   backdrop-filter: blur(0);
-  
-  &.default {
-    border: 2px double transparent;
-    background-origin: border-box;
-    background-clip: border-box;
-    background-image: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
-    box-shadow: 0px 2px 10px 0px rgba(77, 27, 255, 0.30);
 
-    &:hover,
-    &.outline {
-      border: 2px double transparent;
-      background-image: 
-        linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)),
-        radial-gradient(circle at left top, #16AECC, #4D1BFF);
-      background-clip: padding-box, border-box;
+  &.default {
+
+    &:not(.outlined):not(:hover) {
+      background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
+    }
+
+    &:not(.outlined):hover::before,
+    &.outlined::before {
+      // https://stackoverflow.com/a/66936639 | thanks alot to @TemaniAfif
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    &.outlined:hover {
+      box-shadow: 0px 2px 10px 5px rgba(77, 27, 255, 0.30);
     }
   }
 
-  &.alt {    
+  &.alt {
     background-color: var(--primary-base, #4D1BFF) !important;
     box-shadow: 0px 2px 10px 0px rgba(77, 27, 255, 0.30) !important;
     border: 2px solid var(--primary-base, #4D1BFF) !important;
 
     &:hover,
-    &.outline {
+    &.outlined {
       background: transparent !important;
       border: 2px solid var(--primary-base, #4D1BFF) !important;
+    }
+
+    &.outlined:hover {
+      box-shadow: 0px 2px 10px 5px rgba(77, 27, 255, 0.30) !important;
     }
   }
 
@@ -63,7 +80,7 @@
 
 <template>
   <div class="button--container">
-    <button class="button--content" :class="type">
+    <button class="button--content" :class="type" @click="$emit('click')">
       <slot>{{ title }}</slot>
     </button>
   </div>
@@ -82,7 +99,11 @@ export default {
       type: String,
       default: 'C’est fou tout les trucs qu’on peut dire avec un clavier'
     },
-    outline: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    outlined: {
       type: Boolean,
       default: false
     },
@@ -105,7 +126,10 @@ export default {
   },
   computed: {
     type () {
-      const classes = [this.outline ? 'outline' : '']
+      const classes = [
+        this.outlined ? 'outlined' : '',
+        this.disabled ? 'disabled' : ''
+      ]
       
       if (this.default) return [classes, 'default']
       if (this.secondary) return [classes, 'alt']
