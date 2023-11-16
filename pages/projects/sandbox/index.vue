@@ -36,7 +36,7 @@ export default {
           tags: [
             'Affiche', 'IntelligenceArtificielle', 'Animation', 'Scolaire'
           ],
-          img: 'clean_1.png'
+          img: 'affiches/clean_1.svg'
         },
         {
           title: "Le chat de ta mère Michelle",
@@ -44,7 +44,7 @@ export default {
           tags: [
             'Affiche', 'Tragique', 'Chat', 'Scolaire'
           ],
-          img: 'daronne.png'
+          img: 'affiches/daronne.png'
         },
         {
           title: "Le voleur de l'orange du marchand",
@@ -52,7 +52,7 @@ export default {
           tags: [
             'Affiche', 'Aventure', 'Orange', 'Scolaire'
           ],
-          img: 'chair.png'
+          img: 'affiches/chair.png'
         },
         {
           title: "L'assassinat de Jeffrey Epstein",
@@ -60,7 +60,7 @@ export default {
           tags: [
             'Affiche', 'Controverse', 'Epstein', 'Pas très scolaire'
           ],
-          img: 'night.png'
+          img: 'affiches/night.png'
         }
       ]
     }

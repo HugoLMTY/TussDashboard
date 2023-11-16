@@ -179,7 +179,7 @@ export default {
   props: {
     img: {
       type: String,
-      default: '@/assets/illus/pp_small.png'
+      default: 'illus/pp_small.png'
     },
     title: {
       type: String,
