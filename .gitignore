@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+**/test
+**/.nuxt
+
+**/*-lock.json
+**/yarn.lock
+**/*.log
