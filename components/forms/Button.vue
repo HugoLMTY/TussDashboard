@@ -19,6 +19,7 @@
   user-select: none;
   transition-duration: 0.2s !important;
 
+  color: whitesmoke;
   backdrop-filter: blur(0);
 
   &.default {

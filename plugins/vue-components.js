@@ -4,9 +4,9 @@ import Vue from 'vue'
 import Page from '@/components/global/Page.vue'
 import Section from '@/components/global/Section.vue'
 
-// COMPONENTS
-import Card from '@/components/global/Card.vue'
-import Button from '@/components/global/Button.vue'
+// FORMS
+import Card from '@/components/forms/Card.vue'
+import Button from '@/components/forms/Button.vue'
 
 
 

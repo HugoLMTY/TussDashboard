@@ -122,7 +122,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Example container'
+      default: null
     },
     info: {
       type: String,
@@ -130,7 +130,7 @@ export default {
     },
     content: {
       type: String,
-      default: 'C’est fou tout les trucs qu’on peut dire avec un clavier'
+      default: null
     },
     default: {
       type: Boolean,
