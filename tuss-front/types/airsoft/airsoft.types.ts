@@ -1,22 +1,20 @@
 import * as Parts from './parts.types';
 import * as Rifle from './rifle.types';
 
-interface IItem {
+interface IPiece {
   img: string;
   name: string;
   link: string;
   brand: string;
   description: string;
-  // price: number;
-  // weight: number;
 }
 
-interface IAccessory extends IItem {
+interface IAccessory extends IPiece {
   type: Parts.EPartsTypes;
   part: Parts.EParts;
 }
 
-interface IRifle extends IItem {
+interface IRifle extends IPiece {
   type: Rifle.ERifleTypes;
   fps: number;
   rof: number;
@@ -30,7 +28,7 @@ interface IRifle extends IItem {
 export * as Parts from './parts.types';
 export * as Rifle from './rifle.types';
 export {
-  IItem,
+  IPiece,
   IAccessory,
   IRifle,
 }

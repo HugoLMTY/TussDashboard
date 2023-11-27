@@ -1,0 +1,50 @@
+[
+  {
+    "name": "settings",
+    "path": "/settings",
+    "component": "/app/pages/settings.vue",
+    "chunkName": "pages/settings"
+  },
+  {
+    "name": "projects-barrelinator",
+    "path": "/projects/barrelinator",
+    "component": "/app/pages/projects/barrelinator/index.vue",
+    "chunkName": "pages/projects/barrelinator/index"
+  },
+  {
+    "name": "projects-fygw",
+    "path": "/projects/fygw",
+    "component": "/app/pages/projects/fygw/index.vue",
+    "chunkName": "pages/projects/fygw/index"
+  },
+  {
+    "name": "projects-gearout",
+    "path": "/projects/gearout",
+    "component": "/app/pages/projects/gearout/index.vue",
+    "chunkName": "pages/projects/gearout/index"
+  },
+  {
+    "name": "projects-grab-a-tube",
+    "path": "/projects/grab-a-tube",
+    "component": "/app/pages/projects/grab-a-tube/index.vue",
+    "chunkName": "pages/projects/grab-a-tube/index"
+  },
+  {
+    "name": "projects-paralafiche",
+    "path": "/projects/paralafiche",
+    "component": "/app/pages/projects/paralafiche/index.vue",
+    "chunkName": "pages/projects/paralafiche/index"
+  },
+  {
+    "name": "projects-sandbox",
+    "path": "/projects/sandbox",
+    "component": "/app/pages/projects/sandbox/index.vue",
+    "chunkName": "pages/projects/sandbox/index"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/app/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]

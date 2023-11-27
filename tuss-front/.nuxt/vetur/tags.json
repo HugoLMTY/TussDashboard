@@ -1,0 +1,35 @@
+{
+  "NavDrawer": {
+    "description": "Auto imported from components/global/NavDrawer.vue"
+  },
+  "Page": {
+    "description": "Auto imported from components/global/Page.vue"
+  },
+  "Section": {
+    "description": "Auto imported from components/global/Section.vue"
+  },
+  "Affiche": {
+    "description": "Auto imported from components/Affiche.vue"
+  },
+  "FormsButton": {
+    "description": "Auto imported from components/forms/Button.vue"
+  },
+  "FormsCard": {
+    "description": "Auto imported from components/forms/Card.vue"
+  },
+  "FormsTable": {
+    "description": "Auto imported from components/forms/Table.vue"
+  },
+  "HomeLanding": {
+    "description": "Auto imported from components/home/Landing.vue"
+  },
+  "HomeLinks": {
+    "description": "Auto imported from components/home/Links.vue"
+  },
+  "HomeProjects": {
+    "description": "Auto imported from components/home/Projects.vue"
+  },
+  "HomeLandingCactus": {
+    "description": "Auto imported from components/home/landing/Cactus.vue"
+  }
+}

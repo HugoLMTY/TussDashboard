@@ -2,20 +2,20 @@ version: '3'
 services:
   tussdashboard:
     build:
-      context: .
+      context: ./tuss-front
       dockerfile: Dockerfile
     ports:
       - "420:3000"
     volumes:
-      - .:/app
-      - ./assets:/app/assets
-      - ./components:/app/components
-      - ./layouts:/app/layouts
-      - ./pages:/app/pages
-      - ./plugins:/app/plugins
-      - ./static:/app/static
-      - ./store:/app/store
-      - ./types:/app/types
+      - ./tuss-front:/app
+      - ./tuss-front/assets:/app/assets
+      - ./tuss-front/components:/app/components
+      - ./tuss-front/layouts:/app/layouts
+      - ./tuss-front/pages:/app/pages
+      - ./tuss-front/plugins:/app/plugins
+      - ./tuss-front/static:/app/static
+      - ./tuss-front/store:/app/store
+      - ./tuss-front/types:/app/types
 
   tussapi:
     build:
@@ -33,6 +33,7 @@ services:
     ports:
       - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
     environment:
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
