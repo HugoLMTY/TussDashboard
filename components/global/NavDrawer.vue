@@ -22,6 +22,10 @@
 
   border-radius: 0px 16px 16px 0px !important;
 
+  .header {
+    user-select: none;
+  }
+
   .v-list-item {
 
     margin-top: 10px;
@@ -76,24 +80,41 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider class="mx-2" />
-      
-      <v-list-item
-        v-for="({ icon, to, title }, i) in !flood ? items : [...items, ...items, ...items, ...items]"
-        :key="i"
-        :to="to"
-        :active-class="'active'"
-        router
-        exact
-      >
-        <v-list-item-action>
-          <img class="icon" :src="require(`@/assets/icons/${icon}${isActive(to) ? '_fill' : ''}.svg`)" alt="">
-        </v-list-item-action>
+      <div v-for="group in Object.keys(groupedItems)" :key="`group_${group}`">
 
-        <v-list-item-content>
-          <v-list-item-title>{{ title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+        <v-list-item v-if="group" class="header">
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ group }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-list-item
+          v-for="({ icon, to, title }, i) in groupedItems[group]"
+          :key="i"
+          :to="to"
+          :active-class="'active'"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <img class="icon" :src="require(`@/assets/icons/${icon}${isActive(to) ? '_fill' : ''}.svg`)" alt="">
+          </v-list-item-action>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
+        <v-divider class="mx-2" />
+
+      </div>
+
+      <!-- <v-divider class="mx-2" /> -->
+
+      
+      
     </v-list>
 
     <template #append>
@@ -141,32 +162,55 @@ export default {
       {
           icon: 'home',
           title: 'Accueil',
+          group: '',
           to: '/',
         },
         {
           icon: 'glass',
           title: 'Sandbox',
+          group: 'Random',
           to: '/projects/sandbox',
         },
         {
           icon: 'hashtag',
           title: 'Find Your Good Words',
+          group: 'Random',
           to: '/projects/fygw',
         },
         {
           icon: 'bubble',
           title: 'Paralafiche',
+          group: 'Random',
           to: '/projects/paralafiche',
         },
         {
           icon: 'ruler',
           title: 'Barrelinator',
+          group: 'Airsoft',
           to: '/projects/barrelinator',
+        },
+        {
+          icon: 'box',
+          title: 'Gearout',
+          group: 'Airsoft',
+          to: '/projects/gearout',
         },
       ],
     }
   },
-  computed: {},
+  computed: {
+    groupedItems () {
+      const groups = this.items.reduce((acc, item) => {
+        if (!acc[item.group]) {
+          acc[item.group] = []
+        }
+        acc[item.group].push(item)
+        return acc
+      }, {})
+      
+      return groups
+    }
+  },
   watch: {},
   mounted() {},
   methods: {
