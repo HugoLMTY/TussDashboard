@@ -79,7 +79,7 @@
     </Card>
 
     <!-- ? INPUTS -->
-    <div class="row mb-5">
+    <div v-if="inputs" class="row mb-5">
 
       <!-- ? EXTERNES -->
       <Card glass class="col-12" title="Externe">
@@ -233,11 +233,10 @@
     </div>
 
     <!-- ? TABLE -->
-    <Card mesh title="Total">
-      <v-data-table
+    <Card v-if="table" mesh title="Total">
+      <Table
         :headers="headers"
         :items="tableValues"
-        class="elevation-1"
       />
     </Card>
 
@@ -247,18 +246,18 @@
 <script lang="ts">
 
 import {
-  ETypes,
+  EPartsTypes,
 
   EUnits,
   EUnitsName,
   IUnits,
 
+  IParts,
   EParts,
   EPartsName,
-  IParts,
 
   IDimensions
-} from '@/types/barrelinator.types'
+} from '@/types/airsoft/barrelinator.types'
 
 export default {
   components: { },
@@ -293,6 +292,8 @@ export default {
 
     return {
       draw: true,
+      inputs: true,
+      table: true,
       defaultValues,
       ratio,
       units,
@@ -338,10 +339,10 @@ export default {
                   this.getDimension(EParts.tracer, unit.slug)
                 )  
 
-              case 'diff_total':
+              case 'total_total':
                 return this.getDimension(EParts.innerbarrel, unit.slug) - (this.getDimension(EParts.handguard, unit.slug) + this.getDimension(EParts.suppressor, unit.slug))
   
-              case 'diff_barrel':
+              case 'total_barrel':
                 return this.getDimension(EParts.outerbarrel, unit.slug) - this.getDimension(EParts.innerbarrel, unit.slug)
 
               default:
@@ -371,7 +372,7 @@ export default {
           name: EPartsName.handguard,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '5',
           range: [ 100, 800 ],
-          type: ETypes.external,
+          type: EPartsTypes.external,
           show: true
         },
         {
@@ -379,7 +380,7 @@ export default {
           name: EPartsName.suppressor,
           cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '4',
           range: [ 50, 300 ],
-          type: ETypes.external,
+          type: EPartsTypes.external,
           show: true
         },
         {
@@ -387,7 +388,7 @@ export default {
           name: EPartsName.tracer,
           cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '3',
           range: [ 10, 300 ],
-          type: ETypes.external,
+          type: EPartsTypes.external,
           show: true
         },
         {
@@ -395,7 +396,7 @@ export default {
           name: EPartsName.innerbarrel,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
           range: [ 100, 800 ],
-          type: ETypes.internal,
+          type: EPartsTypes.internal,
           show: true
         },
         {
@@ -403,7 +404,7 @@ export default {
           name: EPartsName.outerbarrel,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
           range: [ 100, 800 ],
-          type: ETypes.internal,
+          type: EPartsTypes.internal,
           show: true
         },
         {
@@ -411,7 +412,7 @@ export default {
           name: `${EPartsName.barrelextension} #${this.extensions.length + 1}`,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
           range: [ 50, 200 ],
-          type: ETypes.extension,
+          type: EPartsTypes.extension,
           show: true
         }
       ]
@@ -432,11 +433,11 @@ export default {
         },
         {
           text: 'Différence (canon)',
-          value: 'diff_barrel'
+          value: 'total_barrel'
         },
         {
           text: 'Différence (total)',
-          value: 'diff_total'
+          value: 'total_total'
         },
       ]
     },
@@ -445,7 +446,6 @@ export default {
     toggleShow (type: string): void {
       const targetParts = this.parts.filter(p => p.type === type)
       const hasOneActive = targetParts.some(p => p.show)
-      console.log({ type, targetParts, hasOneActive })
 
       this.parts = this.parts
         .map(p => { return p.type === type ? { ...p, show: !hasOneActive } : p })
@@ -458,7 +458,7 @@ export default {
         name: `${EPartsName.barrelextension} #${this.extensions.length + 1}`,
         cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
         range: [ 50, 200 ],
-        type: ETypes.extension,
+        type: EPartsTypes.extension,
         show: true
       })
     },
@@ -482,11 +482,6 @@ export default {
       } else {
         this.dimensions[type] = setValue(value)
       }
-
-      console.log({
-        dim: this.dimensions
-      })
-
     },
 
     // ? GLOBAL ACTIONS
