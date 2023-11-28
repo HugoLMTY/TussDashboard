@@ -8,7 +8,7 @@
 
     .sheet--container {
       padding: 8px 8px;
-      
+
       transition-duration: 0.2s;
     }
   }
@@ -17,48 +17,58 @@
 
 <template>
   <Page title="Barrel'inator" subtitle="(not for real guns pls)">
-
     <!-- ? DRAW -->
     <Card v-if="draw" mesh scroll class="draw--container my-5">
       <div class="parts--container scroll">
         <div class="d-flex align-start justify-start">
-          <div v-for="part of externalParts.filter(p => p.show)" :key="'part_' + part.slug" class="sheet--container">
+          <div
+            v-for="part of externalParts.filter((p) => p.show)"
+            :key="'part_' + part.slug"
+            class="sheet--container"
+          >
             <v-sheet
-                class="text-center"
-                rounded
-                style="overflow: hidden; color: black"
-                :color="'primary lighten-3'"
-                height="25"
-                :width="(Number(dimensions[part.slug]) * ratio) + 'px'"
-              >
-                {{ part.name }}
+              class="text-center"
+              rounded
+              style="overflow: hidden; color: black"
+              :color="'primary lighten-3'"
+              height="25"
+              :width="Number(dimensions[part.slug]) * ratio + 'px'"
+            >
+              {{ part.name }}
             </v-sheet>
           </div>
         </div>
-        <div v-for="part of internalParts.filter(p => p.show)" :key="'part_' + part.slug" class="d-flex align-start justify-start">
+        <div
+          v-for="part of internalParts.filter((p) => p.show)"
+          :key="'part_' + part.slug"
+          class="d-flex align-start justify-start"
+        >
           <div class="sheet--container">
-            <v-sheet
-                v-if="part.show"
-                class="text-center"
-                rounded
-                style="overflow: hidden; color: black"
-                :color="'primary lighten-3'"
-                height="25"
-                :width="(Number(dimensions[part.slug]) * ratio) + 'px'"
-              >
-                {{ parts.find(p => p.slug === part.slug)?.name }}
+            <v-sheet v-if="part.show"
+              class="text-center"
+              rounded
+              style="overflow: hidden; color: black"
+              :color="'primary lighten-3'"
+              height="25"
+              :width="Number(dimensions[part.slug]) * ratio + 'px'"
+            >
+              {{ parts.find((p) => p.slug === part.slug)?.name }}
             </v-sheet>
           </div>
 
           <div v-if="part.slug === 'outerbarrel'" class="d-flex">
-            <div v-for="(extension, i) of extensions.filter(p => p.show)" :key="'extension_' + i" class="sheet--container">
+            <div
+              v-for="(extension, i) of extensions.filter((p) => p.show)"
+              :key="'extension_' + i"
+              class="sheet--container"
+            >
               <v-sheet
                 class="text-center"
                 rounded
                 style="overflow: hidden; color: black"
                 :color="'primary lighten-3'"
                 height="25"
-                :width="(dimensions.barrelextension[i] * ratio) + 'px'"
+                :width="dimensions.barrelextension[i] * ratio + 'px'"
               >
                 Extension #{{ i + 1 }}
               </v-sheet>
@@ -69,7 +79,7 @@
 
       <!-- ? RATIO -->
       <v-slider
-        v-model=ratio
+        v-model="ratio"
         class="ma-10"
         label="Ratio"
         :min="0.1"
@@ -80,11 +90,18 @@
 
     <!-- ? INPUTS -->
     <div v-if="inputs" class="row mb-5">
-
       <!-- ? EXTERNES -->
       <Card glass class="col-12" title="Externe">
         <template #info>
-          <Button glass @click="toggleShow('external');"> <v-icon> {{ externalParts.some(p => p.show)  ? 'mdi-eye-off-outline' : 'mdi-eye-outline'}} </v-icon> </Button>
+          <Button glass @click="toggleShow('external')">
+            <v-icon>
+              {{
+                externalParts.some((p) => p.show)
+                  ? 'mdi-eye-off-outline'
+                  : 'mdi-eye-outline'
+              }}
+            </v-icon>
+          </Button>
         </template>
 
         <div class="row">
@@ -97,13 +114,16 @@
             glass
           >
             <template #info>
-              <v-switch v-model="part.show" :disabled="parts.filter(p => p.show).length <= 1 && part.show" />
+              <v-switch
+                v-model="part.show"
+                :disabled="parts.filter((p) => p.show).length <= 1 && part.show"
+              />
             </template>
-    
+
             <div class="row">
               <div
                 v-for="unit in units"
-                :key="'form_' + part.slug + '_unit_' + unit.slug" 
+                :key="'form_' + part.slug + '_unit_' + unit.slug"
                 class="col"
               >
                 <v-text-field
@@ -115,7 +135,7 @@
                   @input="setDimension(part.slug, $event, unit.slug)"
                 />
               </div>
-    
+
               <v-slider
                 v-model="dimensions[part.slug]"
                 class="col-12"
@@ -132,7 +152,15 @@
       <!-- ? INTERNES -->
       <Card glass class="col-12" title="Interne">
         <template #info>
-          <Button glass @click="toggleShow('internal')"> <v-icon> {{ internalParts.some(p => p.show)  ? 'mdi-eye-off-outline' : 'mdi-eye-outline'}} </v-icon> </Button>
+          <Button glass @click="toggleShow('internal')">
+            <v-icon>
+              {{
+                internalParts.some((p) => p.show)
+                  ? 'mdi-eye-off-outline'
+                  : 'mdi-eye-outline'
+              }}
+            </v-icon>
+          </Button>
         </template>
 
         <div class="row">
@@ -145,13 +173,19 @@
             glass
           >
             <template #info>
-              <v-switch v-model="part.show" :disabled="parts.filter(p => p.show && p.type !== 'extension').length <= 1 && part.show" />
+              <v-switch
+                v-model="part.show"
+                :disabled="
+                  parts.filter((p) => p.show && p.type !== 'extension')
+                    .length <= 1 && part.show
+                "
+              />
             </template>
-    
+
             <div class="row">
               <div
                 v-for="unit in units"
-                :key="'form_' + part.slug + '_unit_' + unit.slug" 
+                :key="'form_' + part.slug + '_unit_' + unit.slug"
                 class="col"
               >
                 <v-text-field
@@ -163,9 +197,8 @@
                   @input="setDimension(part.slug, $event, unit.slug)"
                 />
               </div>
-    
-              <v-slider
-                v-model="dimensions[part.slug]"
+
+              <v-slider v-model="dimensions[part.slug]"
                 class="col-12"
                 :disabled="!part.show"
                 :min="part.range[0]"
@@ -196,10 +229,16 @@
             <template #info>
               <div class="d-flex" align="center" justify="center">
                 <!-- <v-btn class="col-6" icon disabled @click="deleteExtension(part.name)"> <v-icon color="red">mdi-trash-can-outline</v-icon> </v-btn> -->
-                <v-switch v-model="part.show" class="col-6" :disabled="parts.filter(p => p.show).length <= 1 && part.show" />
+                <v-switch
+                  v-model="part.show"
+                  class="col-6"
+                  :disabled="
+                    parts.filter((p) => p.show).length <= 1 && part.show
+                  "
+                />
               </div>
             </template>
-    
+
             <div class="row">
               <!-- ? BROKEN -->
               <!-- <div
@@ -216,10 +255,15 @@
                   @input="setDimension(part.slug, $event, unit.slug, i)"
                 />
               </div> -->
-    
+
               <v-slider
                 v-model="dimensions.barrelextension[i]"
-                :label="dimensions.barrelextension[i] + 'mm | ' + Math.round(dimensions.barrelextension[i] / 25.40) + 'in'"
+                :label="
+                  dimensions.barrelextension[i] +
+                  'mm | ' +
+                  Math.round(dimensions.barrelextension[i] / 25.4) +
+                  'in'
+                "
                 class="col-12"
                 :disabled="!part.show"
                 :min="part.range[0]"
@@ -233,35 +277,27 @@
     </div>
 
     <!-- ? TABLE -->
-    <Card v-if="table" mesh title="Total">
-      <Table
-        :headers="headers"
-        :items="tableValues"
-      />
+    <Card mesh title="Total" v-if="table">
+      <Table :headers="headers" :items="tableValues" />
     </Card>
-
   </Page>
 </template>
 
 <script lang="ts">
-
 import {
   EPartsTypes,
-
   EUnits,
   EUnitsName,
   IUnits,
-
   IParts,
   EParts,
   EPartsName,
-
   IDimensions
-} from '@/types/airsoft/barrelinator.types'
+} from '~/types/barrelinator.types'
 
 export default {
-  components: { },
-  props: { },
+  components: {},
+  props: {},
   data () {
     const defaultValues = {
       ratio: 2,
@@ -271,7 +307,7 @@ export default {
         tracer: 50,
         innerbarrel: 509,
         outerbarrel: 363,
-        barrelextension: [ 110 ]
+        barrelextension: [110]
       }
     }
 
@@ -280,7 +316,7 @@ export default {
       { slug: EUnits.mm, name: EUnitsName.mm },
       { slug: EUnits.in, name: EUnitsName.in }
     ]
-  
+
     const dimensions: IDimensions = {
       [EParts.handguard]: defaultValues.dimensions.handguard,
       [EParts.suppressor]: defaultValues.dimensions.suppressor,
@@ -288,7 +324,7 @@ export default {
       [EParts.innerbarrel]: defaultValues.dimensions.innerbarrel,
       [EParts.outerbarrel]: defaultValues.dimensions.outerbarrel,
       [EParts.barrelextension]: defaultValues.dimensions.barrelextension
-    };
+    }
 
     return {
       draw: true,
@@ -298,7 +334,7 @@ export default {
       ratio,
       units,
       dimensions,
-      headers: [] as { text: string, value: string }[],
+      headers: [] as { text: string; value: string }[],
       parts: [] as IParts[]
     }
   },
@@ -312,44 +348,53 @@ export default {
       return window.innerWidth <= 600
     },
     internalParts (): IParts[] {
-      return this.parts.filter(p => p.type === 'internal')
+      return this.parts.filter((p) => p.type === 'internal')
     },
     externalParts (): IParts[] {
-      return this.parts.filter(p => p.type === 'external')
+      return this.parts.filter((p) => p.type === 'external')
     },
     extensions (): IParts[] {
-      return this.parts.filter(p => p.type === 'extension')
+      return this.parts.filter((p) => p.type === 'extension')
     },
     tableValues () {
       const values: any = []
-      
-      this.units.forEach(unit => {
-        const current: any = {} 
 
-        this.headers.forEach(header => {
-          const getVal = (slug: string) => {
+      this.units.forEach((unit) => {
+        const current: any = {}
+
+        this.headers.forEach((header) => {
+          const getVal = (slug: string | EParts) => {
             switch (slug) {
               case 'unit':
                 return unit.name
-  
+
               case 'total':
                 return (
                   this.getDimension(EParts.handguard, unit.slug) +
                   this.getDimension(EParts.suppressor, unit.slug) +
                   this.getDimension(EParts.tracer, unit.slug)
-                )  
+                )
 
               case 'total_total':
-                return this.getDimension(EParts.innerbarrel, unit.slug) - (this.getDimension(EParts.handguard, unit.slug) + this.getDimension(EParts.suppressor, unit.slug))
-  
+                return (
+                  this.getDimension(EParts.innerbarrel, unit.slug) -
+                  (this.getDimension(EParts.handguard, unit.slug) +
+                    this.getDimension(EParts.suppressor, unit.slug))
+                )
+
               case 'total_barrel':
-                return this.getDimension(EParts.outerbarrel, unit.slug) - this.getDimension(EParts.innerbarrel, unit.slug)
+                return (
+                  this.getDimension(EParts.outerbarrel, unit.slug) -
+                  this.getDimension(EParts.innerbarrel, unit.slug)
+                )
 
               default:
                 return this.getDimension(slug as EParts, unit.slug)
             }
           }
-          current[header.value] = `${getVal(header.value)}${header.value !== 'unit' ? unit.slug : ''}`
+          current[header.value] = `${getVal(header.value)}${
+            header.value !== 'unit' ? unit.slug : ''
+          }`
         })
 
         values.push(current)
@@ -371,7 +416,7 @@ export default {
           slug: EParts.handguard,
           name: EPartsName.handguard,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '5',
-          range: [ 100, 800 ],
+          range: [100, 800],
           type: EPartsTypes.external,
           show: true
         },
@@ -379,7 +424,7 @@ export default {
           slug: EParts.suppressor,
           name: EPartsName.suppressor,
           cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '4',
-          range: [ 50, 300 ],
+          range: [50, 300],
           type: EPartsTypes.external,
           show: true
         },
@@ -387,7 +432,7 @@ export default {
           slug: EParts.tracer,
           name: EPartsName.tracer,
           cols: this.isVerySmall ? '12' : this.isMobile ? '6' : '3',
-          range: [ 10, 300 ],
+          range: [10, 300],
           type: EPartsTypes.external,
           show: true
         },
@@ -395,7 +440,7 @@ export default {
           slug: EParts.innerbarrel,
           name: EPartsName.innerbarrel,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
-          range: [ 100, 800 ],
+          range: [100, 800],
           type: EPartsTypes.internal,
           show: true
         },
@@ -403,7 +448,7 @@ export default {
           slug: EParts.outerbarrel,
           name: EPartsName.outerbarrel,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
-          range: [ 100, 800 ],
+          range: [100, 800],
           type: EPartsTypes.internal,
           show: true
         },
@@ -411,19 +456,19 @@ export default {
           slug: EParts.barrelextension,
           name: `${EPartsName.barrelextension} #${this.extensions.length + 1}`,
           cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
-          range: [ 50, 200 ],
+          range: [50, 200],
           type: EPartsTypes.extension,
           show: true
         }
       ]
     },
-    buildHeaders (): { text: string, value: string }[] {
+    buildHeaders (): { text: string; value: string }[] {
       return [
         {
           text: 'Unité',
           value: 'unit'
         },
-        ...this.parts.map(p => ({
+        ...this.parts.map((p) => ({
           text: p.name,
           value: p.slug
         })),
@@ -438,17 +483,18 @@ export default {
         {
           text: 'Différence (total)',
           value: 'total_total'
-        },
+        }
       ]
     },
 
     // ? SHOW
     toggleShow (type: string): void {
-      const targetParts = this.parts.filter(p => p.type === type)
-      const hasOneActive = targetParts.some(p => p.show)
+      const targetParts = this.parts.filter((p) => p.type === type)
+      const hasOneActive = targetParts.some((p) => p.show)
 
-      this.parts = this.parts
-        .map(p => { return p.type === type ? { ...p, show: !hasOneActive } : p })
+      this.parts = this.parts.map((p) => {
+        return p.type === type ? { ...p, show: !hasOneActive } : p
+      })
     },
 
     // ? EXTENSIONS
@@ -457,25 +503,31 @@ export default {
         slug: EParts.barrelextension,
         name: `${EPartsName.barrelextension} #${this.extensions.length + 1}`,
         cols: this.isVerySmall ? '12' : this.isMobile ? '12' : '6',
-        range: [ 50, 200 ],
+        range: [50, 200],
         type: EPartsTypes.extension,
         show: true
       })
     },
     deleteExtension (name: string) {
-      this.parts = this.parts.filter(p => p.name !== name)
+      this.parts = this.parts.filter((p) => p.name !== name)
     },
 
     // ? DIMENSIONS / RATIO
     getDimension (type: EParts, unit: EUnits, extension?: number): number {
-      const target = type === 'barrelextension' ? this.dimensions.barrelextension[extension || 0] : this.dimensions[type]
+      const target =
+        type === 'barrelextension'
+          ? this.dimensions.barrelextension[extension || 0]
+          : this.dimensions[type]
 
-      return unit === 'mm' 
-        ? Math.round(target) 
-        : Math.round(target / 25.40)
+      return unit === 'mm' ? Math.round(target) : Math.round(target / 25.4)
     },
-    setDimension (type: EParts, value: number, unit: EUnits, extension?: number): void {
-      const setValue = (value: number) => ( unit === 'mm' ? value : value * 25.40 )
+    setDimension (
+      type: EParts,
+      value: number,
+      unit: EUnits,
+      extension?: number
+    ): void {
+      const setValue = (value: number) => (unit === 'mm' ? value : value * 25.4)
 
       if (type === 'barrelextension') {
         this.dimensions.barrelextension[extension || 0] = setValue(value)

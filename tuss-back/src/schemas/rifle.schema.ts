@@ -1,29 +1,30 @@
-import { Prop, Schema } from '@nestjs/mongoose';
-import { Piece, PieceSchema } from './piece.schema';
-import { Accessory, AccessorySchema } from './accessory.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Piece } from './pieces.schema'
+import { Accessory, AccessorySchema } from './accessory.schema'
+import { Airsoft } from '@hugolmty/shared-types'
 
 @Schema()
 export class Rifle extends Piece {
   @Prop()
-  type: Rifle.ERifleTypes;
+  type: Airsoft.Rifle.ERifleTypes
 
   @Prop()
-  fps: number;
+  fps: number
 
   @Prop()
-  rof: number;
+  rof: number
 
   @Prop()
-  range: number;
+  range: number
 
   @Prop()
-  length: number;
+  length: number
 
   @Prop()
-  weight: number;
+  weight: number
 
   @Prop({ type: [AccessorySchema] })
-  parts: Accessory[];
+  parts: Accessory[]
 }
 
-export const RifleSchema = SchemaFactory.createForClass(Rifle);
+export const RifleSchema = SchemaFactory.createForClass(Rifle)
