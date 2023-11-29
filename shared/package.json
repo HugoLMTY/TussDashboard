@@ -1,5 +1,5 @@
 {
-  "name": "@hugolmty/shared-types",
+  "name": "shared-types",
   "version": "1.0.0",
   "description": "Shared types for front and back",
   "main": "types.ts",

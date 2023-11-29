@@ -1,4 +1,4 @@
-import * as Airsoft from './types';
+import * as Airsoft from './airsoft.types';
 
 // ? TYPES
 export enum EPartsTypes {

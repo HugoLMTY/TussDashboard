@@ -2,9 +2,14 @@ FROM node:18
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY tuss-front/package.json ./
+COPY ./shared ./shared
+
 RUN npm install
-COPY . .
+RUN npm remove shared-types
+RUN npm i ./shared
+
+COPY tuss-front/. .
 
 EXPOSE 3000
 

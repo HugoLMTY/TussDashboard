@@ -2,14 +2,18 @@ FROM node:18
 
 WORKDIR /app
 
-COPY package.json ./
+COPY tuss-back/package.json ./
+COPY ./shared ./shared
 
-RUN npm add @nestjs/cli
 RUN npm install
+RUN npm remove shared-types
+RUN npm i ./shared
 
-COPY src ./src
-COPY tsconfig.json ./
-COPY nest-cli.json ./
+COPY tuss-back/src ./src
+COPY tuss-back/tsconfig.json ./
+COPY tuss-back/nest-cli.json ./
+
+COPY tuss-back/. .
 
 EXPOSE 3000
 

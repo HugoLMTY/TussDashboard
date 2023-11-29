@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Piece } from './pieces.schema'
 import { Accessory, AccessorySchema } from './accessory.schema'
-import { Airsoft } from '@hugolmty/shared-types'
+// import { Airsoft } from 'shared-types'
 
 @Schema()
 export class Rifle extends Piece {
   @Prop()
-  type: Airsoft.Rifle.ERifleTypes
+  // type: Airsoft.Rifle.ERifleTypes
 
   @Prop()
   fps: number

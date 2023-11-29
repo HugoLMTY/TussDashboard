@@ -3,48 +3,56 @@
     "name": "settings",
     "path": "/settings",
     "component": "/app/pages/settings.vue",
-    "chunkName": "pages/settings"
+    "chunkName": "pages/settings",
+    "_name": "_3543fae6"
   },
   {
     "name": "projects-barrelinator",
     "path": "/projects/barrelinator",
     "component": "/app/pages/projects/barrelinator/index.vue",
-    "chunkName": "pages/projects/barrelinator/index"
+    "chunkName": "pages/projects/barrelinator/index",
+    "_name": "_aabc50c2"
   },
   {
     "name": "projects-fygw",
     "path": "/projects/fygw",
     "component": "/app/pages/projects/fygw/index.vue",
-    "chunkName": "pages/projects/fygw/index"
+    "chunkName": "pages/projects/fygw/index",
+    "_name": "_53a39201"
   },
   {
     "name": "projects-gearout",
     "path": "/projects/gearout",
     "component": "/app/pages/projects/gearout/index.vue",
-    "chunkName": "pages/projects/gearout/index"
+    "chunkName": "pages/projects/gearout/index",
+    "_name": "_ec69e992"
   },
   {
     "name": "projects-grab-a-tube",
     "path": "/projects/grab-a-tube",
     "component": "/app/pages/projects/grab-a-tube/index.vue",
-    "chunkName": "pages/projects/grab-a-tube/index"
+    "chunkName": "pages/projects/grab-a-tube/index",
+    "_name": "_b961042e"
   },
   {
     "name": "projects-paralafiche",
     "path": "/projects/paralafiche",
     "component": "/app/pages/projects/paralafiche/index.vue",
-    "chunkName": "pages/projects/paralafiche/index"
+    "chunkName": "pages/projects/paralafiche/index",
+    "_name": "_26c38ae0"
   },
   {
     "name": "projects-sandbox",
     "path": "/projects/sandbox",
     "component": "/app/pages/projects/sandbox/index.vue",
-    "chunkName": "pages/projects/sandbox/index"
+    "chunkName": "pages/projects/sandbox/index",
+    "_name": "_0a3ef09f"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/app/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_2dfb1658"
   }
 ]
