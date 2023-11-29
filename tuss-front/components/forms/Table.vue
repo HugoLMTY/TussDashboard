@@ -105,12 +105,10 @@ export default {
   components: { },
   props: {
     headers: {
-      type: Array,
-      required: true
+      type: Array
     },
     items: {
-      type: Array,
-      required: true
+      type: Array
     },
     align: {
       type: String,

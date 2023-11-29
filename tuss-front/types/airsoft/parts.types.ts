@@ -9,7 +9,9 @@ export enum EParts {
   tracer = 'tracer',
   innerbarrel = 'innerbarrel',
   outerbarrel = 'outerbarrel',
-  barrelextension = 'barrelextension'
+  barrelextension = 'barrelextension',
+  stock = 'stock',
+  receiver = 'receiver',
 }
 export enum EPartsName {
   handguard = 'Garde main',
@@ -17,5 +19,7 @@ export enum EPartsName {
   tracer = 'Traceur',
   innerbarrel = 'Canon Interne',
   outerbarrel = 'Canon Externe',
-  barrelextension = 'Extension'
+  barrelextension = 'Extension',
+  stock = 'Crosse',
+  receiver = 'Corps',
 }
