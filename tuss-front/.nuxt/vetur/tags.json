@@ -14,6 +14,9 @@
   "FormsButton": {
     "description": "Auto imported from components/forms/Button.vue"
   },
+  "FormsButtonSlider": {
+    "description": "Auto imported from components/forms/ButtonSlider.vue"
+  },
   "FormsCard": {
     "description": "Auto imported from components/forms/Card.vue"
   },

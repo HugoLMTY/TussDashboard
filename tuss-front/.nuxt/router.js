@@ -11,6 +11,7 @@ const _ec69e992 = () => interopDefault(import('../pages/projects/gearout/index.v
 const _b961042e = () => interopDefault(import('../pages/projects/grab-a-tube/index.vue' /* webpackChunkName: "pages/projects/grab-a-tube/index" */))
 const _26c38ae0 = () => interopDefault(import('../pages/projects/paralafiche/index.vue' /* webpackChunkName: "pages/projects/paralafiche/index" */))
 const _0a3ef09f = () => interopDefault(import('../pages/projects/sandbox/index.vue' /* webpackChunkName: "pages/projects/sandbox/index" */))
+const _35ed84e4 = () => interopDefault(import('../pages/projects/gearout/components/Accessory.vue' /* webpackChunkName: "pages/projects/gearout/components/Accessory" */))
 const _2dfb1658 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -52,6 +53,10 @@ export const routerOptions = {
     path: "/projects/sandbox",
     component: _0a3ef09f,
     name: "projects-sandbox"
+  }, {
+    path: "/projects/gearout/components/Accessory",
+    component: _35ed84e4,
+    name: "projects-gearout-components-Accessory"
   }, {
     path: "/",
     component: _2dfb1658,

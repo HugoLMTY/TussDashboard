@@ -11,6 +11,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Section>` | `<section>` (components/global/Section.vue)
 - `<Affiche>` | `<affiche>` (components/Affiche.vue)
 - `<FormsButton>` | `<forms-button>` (components/forms/Button.vue)
+- `<FormsButtonSlider>` | `<forms-button-slider>` (components/forms/ButtonSlider.vue)
 - `<FormsCard>` | `<forms-card>` (components/forms/Card.vue)
 - `<FormsTable>` | `<forms-table>` (components/forms/Table.vue)
 - `<HomeLanding>` | `<home-landing>` (components/home/Landing.vue)

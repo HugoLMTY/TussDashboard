@@ -69,6 +69,10 @@
       font-weight: 400;
       line-height: 160%;
       letter-spacing: 0.32px;
+
+      margin-bottom: 24px;
+
+      height: 70px;
     }
     
   }

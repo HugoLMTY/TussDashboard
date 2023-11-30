@@ -49,6 +49,13 @@
     "_name": "_0a3ef09f"
   },
   {
+    "name": "projects-gearout-components-Accessory",
+    "path": "/projects/gearout/components/Accessory",
+    "component": "/app/pages/projects/gearout/components/Accessory.vue",
+    "chunkName": "pages/projects/gearout/components/Accessory",
+    "_name": "_35ed84e4"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/app/pages/index.vue",
