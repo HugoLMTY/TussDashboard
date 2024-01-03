@@ -3,38 +3,45 @@ services:
   tussdashboard:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./tuss-front/Dockerfile
     ports:
       - "420:3000"
     volumes:
-      - .:/app
-      - ./assets:/app/assets
-      - ./components:/app/components
-      - ./layouts:/app/layouts
-      - ./pages:/app/pages
-      - ./plugins:/app/plugins
-      - ./static:/app/static
-      - ./store:/app/store
-      - ./types:/app/types
+      - ./tuss-front:/app
+      - ./tuss-front/assets:/app/assets
+      - ./tuss-front/components:/app/components
+      - ./tuss-front/layouts:/app/layouts
+      - ./tuss-front/pages:/app/pages
+      - ./tuss-front/plugins:/app/plugins
+      - ./tuss-front/services:/app/services
+      - ./tuss-front/static:/app/static
+      - ./tuss-front/store:/app/store
+      - ./tuss-front/types:/app/types
+      - ./shared:/app/shared
 
   tussapi:
     build:
-      context: ./tuss-back
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./tuss-back/Dockerfile
     ports:
       - "3003:3000"
     volumes:
       - ./tuss-back:/app
       - ./tuss-back/node_modules:/app/node_modules
-    
+      - ./tuss-back/src:/app/src  
+      - ./shared:/app/shared
+    depends_on:
+      - mongo
 
-  mongodb:
+  mongo:
     image: mongo
-    ports:
-      - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
+    # ports:
+    #   - '${MONGO_DB_PORT}:${MONGO_DB_PORT}'
     environment:
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    restart: always
     volumes:
       - database:/data/db
 
@@ -42,16 +49,17 @@ services:
   mongo_express:
     image: mongo-express:latest
     ports:
-      - '421:8081'
+      - '8081:8081'
     environment:
-      - ME_CONFIG_BASICAUTH_USERNAME=${ME_CONFIG_BASICAUTH_USERNAME}
-      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_CONFIG_BASICAUTH_PASSWORD}
+      # - ME_CONFIG_BASICAUTH_USERNAME=${ME_CONFIG_BASICAUTH_USERNAME}
+      # - ME_CONFIG_BASICAUTH_PASSWORD=${ME_CONFIG_BASICAUTH_PASSWORD}
       - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-      - ME_CONFIG_MONGODB_PORT=${MONGO_DB_PORT}
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      # - ME_CONFIG_MONGODB_PORT=${MONGO_DB_PORT}
+      # - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_URL=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
     depends_on:
-      - mongodb
+      - mongo
 
 volumes:
   database:

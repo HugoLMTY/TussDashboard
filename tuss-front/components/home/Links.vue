@@ -6,8 +6,8 @@
     ( ͡° ͜ʖ ͡°)
 
     <v-row class="my-10" align="center" justify="center">
-      <Button class="col" title="default" default />
-      <Button class="col" title="default outlined" default outlined />
+      <Button class="col" title="gradient" gradient />
+      <Button class="col" title="gradient outlined" gradient outlined />
 
       <Button class="col" title="secondary" secondary />
       <Button class="col" title="secondary outlined" secondary outlined />
@@ -16,8 +16,8 @@
     </v-row>
 
     <v-row class="my-10" align="center" justify="center">
-      <Button class="col" title="disabled default" default disabled/>
-      <Button class="col" title="disabled default outlined" default outlined disabled/>
+      <Button class="col" title="disabled gradient" gradient disabled/>
+      <Button class="col" title="disabled gradient outlined" gradient outlined disabled/>
 
       <Button class="col" title="disabled secondary" secondary disabled/>
       <Button class="col" title="disabled secondary outlined" secondary outlined disabled/>

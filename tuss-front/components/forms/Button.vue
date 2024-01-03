@@ -22,7 +22,7 @@
   color: whitesmoke;
   backdrop-filter: blur(0);
 
-  &.default {
+  &.gradient {
 
     &:not(.outlined):not(:hover) {
       background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
@@ -108,7 +108,7 @@ export default {
       type: Boolean,
       default: false
     },
-    default: {
+    gradient: {
       type: Boolean,
       default: false
     },
@@ -132,7 +132,7 @@ export default {
         this.disabled ? 'disabled' : ''
       ]
       
-      if (this.default) return [classes, 'default']
+      if (this.gradient) return [classes, 'gradient']
       if (this.secondary) return [classes, 'alt']
       if (this.glass) return [classes, 'glass']
 

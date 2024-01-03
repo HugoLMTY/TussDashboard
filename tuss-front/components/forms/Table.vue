@@ -78,7 +78,7 @@
           :class="`
             text-${item.align}
             ${isTotal(head.value) ? 'bg-grey-400' : ''}
-            ${item.class}`"
+            ${item.class || ''}`"
           >
           {{ item[head.value] }}
         </td>
@@ -105,12 +105,10 @@ export default {
   components: { },
   props: {
     headers: {
-      type: Array,
-      required: true
+      type: Array
     },
     items: {
-      type: Array,
-      required: true
+      type: Array
     },
     align: {
       type: String,
@@ -138,7 +136,7 @@ export default {
       const h = this.headers
       const { align, sortable, headerClass } = this
       
-      return h.map(h => {
+      return h?.map(h => {
         return {
           text: h.text,
           value: h.value,
@@ -151,7 +149,7 @@ export default {
     },
     mappedItems() {
       const { align, sortable, itemClass } = this
-      const i = this.items.map(i => {
+      const i = this.items?.map(i => {
         return {
           ...i,
           type: i.type || 'item',
@@ -192,7 +190,7 @@ export default {
   mounted () {
   },
   methods: {
-    isTotal(header) {
+    isTotal(header = '') {
       const totals = ['total', 'diff']
       return totals.some(t => header.includes(t))
     }
