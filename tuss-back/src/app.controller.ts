@@ -11,7 +11,9 @@ export class AppController {
   }
 
   @Post()
-  async places(): Promise<{ field: string; date: string; places: number }[]> {
+  async places(): Promise<
+    { field: string; date: string; places: number; website: string }[]
+  > {
     const places = this.appService.getPlaces();
 
     return places;
