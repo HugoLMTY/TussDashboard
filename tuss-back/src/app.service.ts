@@ -113,19 +113,21 @@ export class AppService {
       }
 
       if (
-        [
-          // Different handling
-          'Mouse',
-          'AlphaUnit',
-          'Continental',
-          'Caen Airsoft Team',
-          'Domain (pas OP)',
-          'Agency (pas OP)',
+        // [
+        //   // Different handling
+        //   'Mouse',
+        //   'AlphaUnit',
+        //   'Continental',
+        //   'Caen Airsoft Team',
+        //   'Domain (pas OP)',
+        //   'Agency (pas OP)',
 
-          // Other
-          'Auderghem',
-          'AMA France Dominicales',
-        ].includes(field)
+        //   // Other
+        //   'Auderghem',
+        //   'AMA France Dominicales',
+        // ].includes(field)
+        // Reverse handling - only handle those below
+        !['Max2Joules', 'PowergunCQB', 'Powergun Forêt', 'TAT'].includes(field)
       ) {
         // console.log('handle this b$tch -> ' + field)
         return null;
