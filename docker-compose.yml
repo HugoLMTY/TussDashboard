@@ -1,9 +1,11 @@
 version: '3'
 services:
-  tussdashboard:
+  tussfront:
     build:
       context: .
       dockerfile: ./tuss-front/Dockerfile
+      args:
+        API_HOST: http://localhost:${API_HOST:-3003}
     ports:
       - "420:3000"
     volumes:
@@ -25,10 +27,12 @@ services:
       dockerfile: ./tuss-back/Dockerfile
     ports:
       - "3003:3000"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     volumes:
       - ./tuss-back:/app
       - ./tuss-back/node_modules:/app/node_modules
-      - ./tuss-back/src:/app/src  
+      - ./tuss-back/src:/app/src
       - ./shared:/app/shared
     depends_on:
       - mongo

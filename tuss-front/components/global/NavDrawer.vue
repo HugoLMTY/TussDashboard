@@ -172,6 +172,12 @@ export default {
           to: '/projects/sandbox',
         },
         {
+          icon: 'notes',
+          title: 'ScIAp',
+          group: 'Random',
+          to: '/projects/scriap',
+        },
+        {
           icon: 'hashtag',
           title: 'Find Your Good Words',
           group: 'Random',
