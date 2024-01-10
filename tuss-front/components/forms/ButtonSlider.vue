@@ -1,10 +1,12 @@
 <style lang="scss" scoped>
 .slider--container {
-  height: 50px;
+  min-height: 50px;
   min-width: 250px;
 
+  user-select: none;
+
   .title {
-    color: $--primary-600;
+    color: $--primary-300;
 
     font-size: 12px;
     font-weight: 500;
@@ -23,6 +25,8 @@
     border-radius: 6px;
     border: 1px solid $--grey-100;
 
+    width: fit-content;
+
     .item {
       display: flex;
       padding: 8px 12px;
@@ -40,7 +44,7 @@
       border: 3px solid transparent;
 
       &.active {
-        background: $--primary-500;
+        background: $--primary-400;
         
         span {
           color: $--primary-700 !important;
@@ -63,7 +67,7 @@
         line-height: 130%; /* 15.6px */
 
 
-        color: $--primary-600;
+        color: $--primary-300;
       }
     }
   }
@@ -79,10 +83,10 @@
       <div
         v-for="item in items"
         class="item"
-        :class="{ 'active': value === item }"
-        @click="$emit('input', item)"
+        :class="{ 'active': typeof item === 'string' ? value === item : value === item.value }"
+        @click="$emit('input', typeof item === 'string' ? item : item.value)"
       >
-        <span> {{ item }} </span>
+        <span> {{ typeof item === 'string' ? item : item.text }} </span>
       </div>
     </div>
   </div>
@@ -112,7 +116,6 @@ export default {
   computed: {
   },
   mounted () {
-    console.log('Component mounted')
   },
   methods: {
   }

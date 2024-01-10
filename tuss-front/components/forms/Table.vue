@@ -80,7 +80,9 @@
             ${isTotal(head.value) ? 'bg-grey-400' : ''}
             ${item.class || ''}`"
           >
-          {{ item[head.value] }}
+            <slot :name="head.value" :item="item" :head="head">
+              {{ item[head.value] }}
+            </slot>            
         </td>
       </tr>
     </template>

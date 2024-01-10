@@ -201,6 +201,12 @@ export default {
           group: 'Airsoft',
           to: '/projects/gearout',
         },
+        {
+          icon: 'book',
+          title: 'ARPlaces',
+          group: 'Airsoft',
+          to: '/projects/arplaces',
+        }
       ],
     }
   },

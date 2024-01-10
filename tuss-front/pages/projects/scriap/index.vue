@@ -35,7 +35,6 @@
 </template>
 
 <script>
-
 import ScriapService from '@/services/scriap'
 
 export default {
@@ -56,6 +55,7 @@ export default {
   },
   methods: {
     async generate () {
+      return alert('disabled coz im poor')
       this.loading = true
       this.error = false
       this.message = ''

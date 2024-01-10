@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 export default {
-  redirectIfError(err)
-  {
+  redirectIfError(err) {
     throw err
     return err
     // if (res.status === 401) {
@@ -10,14 +9,12 @@ export default {
     // }
   },
 
-  async get(url, params)
-  {
+  async get(url, params) {
     try {
-      console.log({ process: process.env })
       const res = await axios.get('http://localhost:3003' + url, {
         params: {
-          ...params
-        }
+          ...params,
+        },
       })
       if (res && res.data) {
         return res.data
@@ -26,10 +23,10 @@ export default {
       return this.redirectIfError(err)
     }
   },
-  async post(url, body)
-  {
+
+  async post(url, body) {
     try {
-      const res = await axios.post(process.env.API_HOST + url, body)
+      const res = await axios.post('http://localhost:3003' + url, body)
       if (res && res.data) {
         return res.data
       }
@@ -37,10 +34,9 @@ export default {
       this.redirectIfError(e.response)
     }
   },
-  async put(url, body)
-  {
+  async put(url, body) {
     try {
-      const res = await axios.put(process.env.API_HOST + url, body)
+      const res = await axios.put('http://localhost:3003' + url, body)
       if (res && res.data) {
         return res.data
       }
@@ -48,10 +44,9 @@ export default {
       this.redirectIfError(e.response)
     }
   },
-  async delete(url, body)
-  {
+  async delete(url, body) {
     try {
-      const res = await axios.delete(process.env.API_HOST + url, { data: body })
+      const res = await axios.delete('http://localhost:3003' + url, { data: body })
       if (res && res.data) {
         return res.data
       }

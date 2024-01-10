@@ -11,6 +11,7 @@ export default {
   ],
   plugins: [],
   rules: {
+    "function-paren-newline": "off",
     "prettier/prettier": 'off',
     'no-console': 'warn',
     'vue/no-v-html': 'off',
