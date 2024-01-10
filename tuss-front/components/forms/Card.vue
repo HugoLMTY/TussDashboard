@@ -7,6 +7,7 @@
   border-radius: 20px;
   padding: 32px 24px;
 
+  overflow: auto;
   &.default {
     background: $--grey-600;
     z-index: 1;
@@ -72,7 +73,8 @@
 
       margin-bottom: 24px;
 
-      height: 70px;
+      min-height: 70px;
+      overflow: auto;
     }
     
   }

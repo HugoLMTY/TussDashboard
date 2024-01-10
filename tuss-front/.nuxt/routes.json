@@ -7,6 +7,13 @@
     "_name": "_3543fae6"
   },
   {
+    "name": "projects-arplaces",
+    "path": "/projects/arplaces",
+    "component": "/app/pages/projects/arplaces/index.vue",
+    "chunkName": "pages/projects/arplaces/index",
+    "_name": "_7ab83a8a"
+  },
+  {
     "name": "projects-barrelinator",
     "path": "/projects/barrelinator",
     "component": "/app/pages/projects/barrelinator/index.vue",
@@ -49,11 +56,11 @@
     "_name": "_0a3ef09f"
   },
   {
-    "name": "projects-gearout-components-Accessory",
-    "path": "/projects/gearout/components/Accessory",
-    "component": "/app/pages/projects/gearout/components/Accessory.vue",
-    "chunkName": "pages/projects/gearout/components/Accessory",
-    "_name": "_35ed84e4"
+    "name": "projects-scriap",
+    "path": "/projects/scriap",
+    "component": "/app/pages/projects/scriap/index.vue",
+    "chunkName": "pages/projects/scriap/index",
+    "_name": "_ca268118"
   },
   {
     "name": "index",

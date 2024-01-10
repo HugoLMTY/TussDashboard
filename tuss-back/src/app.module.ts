@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 // import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ARPlacesController } from './arplaces/arplaces.controller';
+import { ARPlacesService } from './arplaces/arplaces.service';
 // import { PieceModule } from './pieces/piece.module';
 // import { RiflesModule } from './rifles/rifles.module';
 // import { AccessoriesModule } from './accessories/accessories.module';
@@ -13,7 +15,7 @@ import { AppService } from './app.service';
     // RiflesModule,
     // AccessoriesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ARPlacesController],
+  providers: [AppService, ARPlacesService],
 })
 export class AppModule {}

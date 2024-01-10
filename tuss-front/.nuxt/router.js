@@ -5,13 +5,14 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _3543fae6 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _7ab83a8a = () => interopDefault(import('../pages/projects/arplaces/index.vue' /* webpackChunkName: "pages/projects/arplaces/index" */))
 const _aabc50c2 = () => interopDefault(import('../pages/projects/barrelinator/index.vue' /* webpackChunkName: "pages/projects/barrelinator/index" */))
 const _53a39201 = () => interopDefault(import('../pages/projects/fygw/index.vue' /* webpackChunkName: "pages/projects/fygw/index" */))
 const _ec69e992 = () => interopDefault(import('../pages/projects/gearout/index.vue' /* webpackChunkName: "pages/projects/gearout/index" */))
 const _b961042e = () => interopDefault(import('../pages/projects/grab-a-tube/index.vue' /* webpackChunkName: "pages/projects/grab-a-tube/index" */))
 const _26c38ae0 = () => interopDefault(import('../pages/projects/paralafiche/index.vue' /* webpackChunkName: "pages/projects/paralafiche/index" */))
 const _0a3ef09f = () => interopDefault(import('../pages/projects/sandbox/index.vue' /* webpackChunkName: "pages/projects/sandbox/index" */))
-const _35ed84e4 = () => interopDefault(import('../pages/projects/gearout/components/Accessory.vue' /* webpackChunkName: "pages/projects/gearout/components/Accessory" */))
+const _ca268118 = () => interopDefault(import('../pages/projects/scriap/index.vue' /* webpackChunkName: "pages/projects/scriap/index" */))
 const _2dfb1658 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -29,6 +30,10 @@ export const routerOptions = {
     path: "/settings",
     component: _3543fae6,
     name: "settings"
+  }, {
+    path: "/projects/arplaces",
+    component: _7ab83a8a,
+    name: "projects-arplaces"
   }, {
     path: "/projects/barrelinator",
     component: _aabc50c2,
@@ -54,9 +59,9 @@ export const routerOptions = {
     component: _0a3ef09f,
     name: "projects-sandbox"
   }, {
-    path: "/projects/gearout/components/Accessory",
-    component: _35ed84e4,
-    name: "projects-gearout-components-Accessory"
+    path: "/projects/scriap",
+    component: _ca268118,
+    name: "projects-scriap"
   }, {
     path: "/",
     component: _2dfb1658,

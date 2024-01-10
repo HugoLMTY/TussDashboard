@@ -24,44 +24,58 @@
 
   &.gradient {
 
-    &:not(.outlined):not(:hover) {
+    // &:not(.oultlined):hover {
+      
+    // }
+
+    &:not(.outlined) {
       background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
+
+      &:hover {
+        box-shadow: 0px 2px 10px 5px rgba(77, 27, 255, 0.30);
+      }
     }
 
-    &:not(.outlined):hover::before,
-    &.outlined::before {
-      // https://stackoverflow.com/a/66936639 | thanks alot to @TemaniAfif
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      padding: 2px;
-      background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      pointer-events: none;
-    }
+    &.outlined {
 
-    &.outlined:hover {
-      box-shadow: 0px 2px 10px 5px rgba(77, 27, 255, 0.30);
+      &:hover {
+        background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
+      }
+
+      &::before,
+      &:hover::before {
+        // https://stackoverflow.com/a/66936639 | thanks alot to @TemaniAfif
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        padding: 2px;
+        background: linear-gradient(135deg, #16AECC 0%, #4D1BFF 100%);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+        pointer-events: none;
+      }
     }
   }
 
   &.alt {
-    background-color: var(--primary-base, #4D1BFF) !important;
-    box-shadow: 0px 2px 10px 0px rgba(77, 27, 255, 0.30) !important;
+    // box-shadow: 0px 2px 10px 0px rgba(77, 27, 255, 0.30) !important;
     border: 2px solid var(--primary-base, #4D1BFF) !important;
+    background-color: var(--primary-base, #4D1BFF) !important;
 
-    &:hover,
     &.outlined {
       background: transparent !important;
       border: 2px solid var(--primary-base, #4D1BFF) !important;
     }
-
-    &.outlined:hover {
+    
+    &:not(.outlined):hover {
       box-shadow: 0px 2px 10px 5px rgba(77, 27, 255, 0.30) !important;
+    }
+    
+    &.outlined:hover {
+      background-color: var(--primary-base, #4D1BFF) !important;
     }
   }
 
