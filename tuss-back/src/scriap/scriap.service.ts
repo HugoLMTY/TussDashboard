@@ -10,7 +10,29 @@ export class ScriapService {
   getHello(): string {
     return 'Hello World!';
   }
-  
+
+  async generateText (prompt: string) {
+    console.log(`Generating text with prompt: ${prompt}`);
+
+    try {
+      const completion = await openai.chat.completions.create({
+        messages: [{
+          role: "system",
+          content: prompt
+        }],
+        model: "gpt-3.5-turbo",
+      });
+
+      console.log(completion.choices[0]);
+
+      return completion?.choices[0]?.message.content || new HttpException("No response from OpenAI", HttpStatus.FORBIDDEN);
+
+    } catch ({ error }) {
+      console.log({ error })
+      return new HttpException(error.message, HttpStatus.FORBIDDEN)
+    }
+  }
+
   async generateImage (prompt: string) {
     console.log(`Generating image with prompt: ${prompt}`);
 
