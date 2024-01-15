@@ -147,11 +147,12 @@ export class ARPlacesService {
           .filter(Boolean);
 
         games.forEach((game) => {
-          const title = game
-            .split('<p>')[1]
+          const title = (game.includes('<p>')
+            ? game.split('<p>')[1]
+            : game)
             .split(' <br />')[0]
             .split('<img')[0]
-            .trim();
+            .trim()
 
           const date = title.match(
             /(\d{2}\/\d{2}\/\d{2})|(\d{1,2} .+ \d{4})|(\d{1,2} .+?(?=\())|(\d{1,2} .+)/,
@@ -189,7 +190,7 @@ export class ARPlacesService {
       
     } catch ({ error }) {
       console.log({ error })
-      return new HttpException(error.message, HttpStatus.FORBIDDEN)
+      return new HttpException(error?.message, HttpStatus.FORBIDDEN)
     }
   }
 }
