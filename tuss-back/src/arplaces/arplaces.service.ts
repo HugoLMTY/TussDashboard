@@ -74,8 +74,17 @@ export class ARPlacesService {
 
         if (!toDate.getTime()) {
           const months = {
+            janvier: 'january',
             fevrier: 'february',
+            mars: 'march',
+            avril: 'april',
+            mai: 'may',
+            juin: 'june',
+            juillet: 'july',
             aout: 'august',
+            septembre: 'september',
+            octobre: 'october',
+            novembre: 'november',
             decembre: 'december',
           };
 
@@ -115,7 +124,7 @@ export class ARPlacesService {
         if (!field || field === 'Notes') {
           return null;
         }
-        if (content.includes('Rien trouvé')) {
+        if (content?.includes('Rien trouvé')) {
           return null;
         }
 
@@ -154,9 +163,15 @@ export class ARPlacesService {
             .split('<img')[0]
             .trim()
 
-          const date = title.match(
+          let date = title.match(
             /(\d{2}\/\d{2}\/\d{2})|(\d{1,2} .+ \d{4})|(\d{1,2} .+?(?=\())|(\d{1,2} .+)/,
           )[0];
+
+          if (!date.match(/202\d/)) {
+            date = `${date} ${new Date().getFullYear()}`
+          }
+
+          console.log({ date })
 
           const places = Number(
             game
@@ -188,9 +203,9 @@ export class ARPlacesService {
       console.table(filtered);
       return filtered;
       
-    } catch ({ error }) {
-      console.log({ error })
-      return new HttpException(error?.message, HttpStatus.FORBIDDEN)
+    } catch (err) {
+      console.log({ err })
+      return new HttpException(err?.message, HttpStatus.FORBIDDEN)
     }
   }
 }

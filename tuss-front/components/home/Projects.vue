@@ -32,6 +32,35 @@ export default {
   props: { },
   data () {
     return {
+      projects: [
+        {
+          name: 'Tuss',
+          desc: 'Un site web (lui) pour montrer mes projets et faire un peu ce que je veux',
+          img: 'https://picsum.photos/200/300',
+          alive: true
+        },
+        {
+          name: 'FYGW',
+          desc: 'Un générateur d\'insultes procédural, gérant les insultes à plusieurs mots, différents genres, etc...',
+          img: 'https://picsum.photos/200/300',
+          alive: true
+        },
+        {
+          name: 'Barrelinator',
+          desc: 'Un outil de calcul pour les dimensions de pièces d\'airsoft',
+          img: '',
+          alive: true
+        },
+        {
+          name: 'Grab-a-tube',
+          desc: 'Un downloader de vidéos youtube (légal) (non) (de toute facon il fonctionne plus)',
+          img: '',
+          alive: false
+        },
+        {
+          name: 'ARPlaces'
+        }
+      ]
     }
   },
   computed: {

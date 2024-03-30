@@ -173,7 +173,7 @@ export default {
         },
         {
           icon: 'notes',
-          title: 'ScIAp',
+          title: 'ScrIAp',
           group: 'Random',
           to: '/projects/scriap',
         },

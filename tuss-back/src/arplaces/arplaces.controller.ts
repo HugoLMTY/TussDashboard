@@ -4,19 +4,19 @@ import { ARPlacesService } from './arplaces.service';
 @Controller('arplaces')
 export class ARPlacesController {
   constructor(
-    private readonly ARPlacesServices: ARPlacesService
+    private readonly ARPlaceService: ARPlacesService
   ) {}
 
 
   @Get()
   getHello(): string {
-    return this.ARPlacesServices.getHello();
+    return this.ARPlaceService.getHello();
   }
 
   @Post()
   async fetch (
     @Body('params') params: { date: string; fields: string[] },
   ) {
-    return await this.ARPlacesServices.fetch(params);
+    return await this.ARPlaceService.fetch(params);
   }
 }
